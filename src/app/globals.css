@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 36 100% 96.1%; /* #fff7eb */
+    --foreground: 210 10% 16.5%; /* #262a2e */
+    --card: 36 100% 98%;
+    --card-foreground: 210 10% 16.5%;
+    --popover: 36 100% 96.1%;
+    --popover-foreground: 210 10% 16.5%;
+    --primary: 201 93% 17.1%; /* #033754 */
+    --primary-foreground: 36 100% 96.1%; /* #fff7eb */
+    --secondary: 210 10% 25%;
+    --secondary-foreground: 36 100% 96.1%;
+    --muted: 36 40% 90%;
+    --muted-foreground: 210 10% 45%;
+    --accent: 36 40% 90%;
+    --accent-foreground: 201 93% 17.1%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 36 20% 85%;
+    --input: 36 20% 85%;
+    --ring: 201 93% 17.1%;
+    --radius: 0.5rem;
+    --sidebar-background: 36 100% 96.1%;
+    --sidebar-foreground: 210 10% 16.5%;
+    --sidebar-primary: 201 93% 17.1%;
+    --sidebar-primary-foreground: 36 100% 96.1%;
+    --sidebar-accent: 36 40% 90%;
+    --sidebar-accent-foreground: 201 93% 17.1%;
+    --sidebar-border: 36 20% 85%;
+    --sidebar-ring: 201 93% 17.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'DM Sans', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Lexend', sans-serif;
+    font-weight: 700;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
