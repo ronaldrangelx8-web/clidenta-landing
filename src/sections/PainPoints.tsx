@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
+import { ChevronLeft, Video, Phone, Camera, Mic, Wifi, SignalHigh, BatteryFull } from 'lucide-react';
 
 interface Message {
   sender: 'user' | 'ai';
@@ -35,7 +36,7 @@ const PainPoints: React.FC = () => {
     { type: 'message', message: { sender: 'ai', text: '✅ ¡Listo! Cita agendada:\n\n📅 Mañana miércoles\n🕒 4:30 PM\n🦷 Limpieza dental\n\nTe enviaré un recordatorio 24h antes. ¡Te esperamos!', time: '11:43 PM' }, duration: 1800 },
     { type: 'message', message: { sender: 'user', text: 'Wow, ¡a esta hora y me respondieron! Gracias 🙌', time: '11:44 PM' }, duration: 1500 },
     { type: 'typing', duration: 1000 },
-    { type: 'message', message: { sender: 'ai', text: '¡Siempre disponible para ti! 24/7, los 365 días. Cualquier duda, escríbenos. 💙', time: '11:44 PM' }, duration: 4000 },
+    { type: 'message', message: { sender: 'ai', text: '¡Siempre disponible para ti! 24/7, los 365 días. Cualquier duda, escríbenos. 🦷', time: '11:44 PM' }, duration: 4000 },
   ];
 
   const [isTyping, setIsTyping] = useState(false);
@@ -108,71 +109,97 @@ const PainPoints: React.FC = () => {
             ))}
           </div>
 
-          {/* WhatsApp Chat Simulator */}
-          <div className="flex justify-center w-full max-w-md mx-auto">
-            <div className="w-full bg-[#efeae2] rounded-2xl overflow-hidden shadow-2xl border border-gray-300/50 text-gray-800 flex flex-col h-[500px]">
-              
-              {/* WhatsApp Header */}
-              <div className="bg-[#075e54] text-white px-4 py-3.5 flex items-center gap-3 shadow-md">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-white/30 to-white/10 flex items-center justify-center text-lg">
-                  🦷
-                </div>
-                <div className="flex-1">
-                  <div className="font-semibold text-sm">Recepcionista IA · Clínica Dental</div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                    <span className="text-[10px] text-white/80">en línea</span>
-                  </div>
-                </div>
-              </div>
+          {/* iPhone + WhatsApp Chat Simulator */}
+          <div className="flex justify-center w-full">
+            {/* Marco del iPhone */}
+            <div className="w-[320px] sm:w-[340px] rounded-[3.2rem] bg-[#111114] p-[11px] shadow-2xl ring-1 ring-white/15">
+              {/* Pantalla */}
+              <div className="rounded-[2.55rem] overflow-hidden bg-[#ECE5DD] flex flex-col h-[640px] relative">
 
-              {/* Time Stamp */}
-              <div className="flex justify-center py-2">
-                <span className="bg-white/80 text-[10px] text-gray-600 px-3 py-1 rounded-full shadow-sm">11:42 PM · Hoy</span>
-              </div>
-
-              {/* Chat Body */}
-              <div ref={chatBodyRef} className="flex-1 px-3 pb-3 overflow-y-auto space-y-2 flex flex-col justify-start scroll-smooth">
-                
-                {visibleMessages.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={`max-w-[80%] rounded-lg p-2.5 text-[13px] shadow-sm relative ${
-                      msg.sender === 'user'
-                        ? 'bg-[#d9fdd3] self-end rounded-tr-none'
-                        : 'bg-white self-start rounded-tl-none'
-                    }`}
-                    style={{ animation: 'fadeInUp 0.3s ease-out' }}
-                  >
-                    <p className="whitespace-pre-line leading-relaxed">{msg.text}</p>
-                    <span className="text-[9px] text-gray-600 float-right mt-1 ml-2 flex items-center gap-1">
-                      {msg.time}
-                      {msg.sender === 'user' && <span className="text-blue-500">✓✓</span>}
+                {/* Status bar + header iOS */}
+                <div className="bg-[#f6f6f6] border-b border-black/10">
+                  {/* Status bar */}
+                  <div className="relative flex items-center justify-between px-7 pt-3 pb-1 text-[#111114]">
+                    <span className="text-[13px] font-semibold tracking-tight">11:42</span>
+                    {/* Dynamic Island */}
+                    <div className="absolute left-1/2 -translate-x-1/2 top-2.5 h-[26px] w-[100px] rounded-full bg-black" />
+                    <span className="flex items-center gap-1">
+                      <SignalHigh size={15} strokeWidth={2.5} />
+                      <Wifi size={15} strokeWidth={2.5} />
+                      <BatteryFull size={18} strokeWidth={2} />
                     </span>
                   </div>
-                ))}
 
-                {/* Typing Indicator */}
-                {isTyping && (
-                  <div className="bg-white max-w-[70px] rounded-lg rounded-tl-none p-3 shadow-sm self-start flex gap-1.5 justify-center items-center">
-                    <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                    <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                    <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                  {/* WhatsApp header */}
+                  <div className="flex items-center gap-2 px-2.5 py-2">
+                    <ChevronLeft size={26} className="text-[#007AFF] shrink-0" strokeWidth={2.2} />
+                    <div className="w-9 h-9 rounded-full bg-gradient-to-br from-teal-600 to-teal-800 flex items-center justify-center text-base shrink-0">
+                      🦷
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-[13.5px] text-[#111114] leading-tight truncate">
+                        Recepcionista IA
+                      </div>
+                      <div className="text-[11px] text-gray-500 leading-tight">
+                        {isTyping ? 'escribiendo…' : 'en línea'}
+                      </div>
+                    </div>
+                    <Video size={22} className="text-[#007AFF] shrink-0 mr-2" strokeWidth={1.8} />
+                    <Phone size={19} className="text-[#007AFF] shrink-0 mr-1" strokeWidth={1.8} />
                   </div>
-                )}
-              </div>
-
-              {/* WhatsApp Footer input mockup */}
-              <div className="bg-[#f0f2f5] p-2.5 flex items-center gap-2 border-t border-gray-200">
-                <div className="text-gray-500 text-lg">😊</div>
-                <div className="flex-1 bg-white rounded-full px-4 py-2 text-xs text-gray-500">
-                  Escribe un mensaje...
                 </div>
-                <div className="w-9 h-9 rounded-full bg-[#075e54] flex items-center justify-center text-white text-sm">
-                  🎤
-                </div>
-              </div>
 
+                {/* Time Stamp */}
+                <div className="flex justify-center py-2">
+                  <span className="bg-white/85 text-[10px] text-gray-500 px-3 py-1 rounded-full shadow-sm">11:42 PM · Hoy</span>
+                </div>
+
+                {/* Chat Body */}
+                <div ref={chatBodyRef} className="flex-1 px-3 pb-3 overflow-y-auto space-y-2 flex flex-col justify-start scroll-smooth">
+
+                  {visibleMessages.map((msg, index) => (
+                    <div
+                      key={index}
+                      className={`max-w-[80%] rounded-lg p-2.5 text-[13px] shadow-sm relative ${
+                        msg.sender === 'user'
+                          ? 'bg-[#d9fdd3] self-end rounded-tr-none'
+                          : 'bg-white self-start rounded-tl-none'
+                      }`}
+                      style={{ animation: 'fadeInUp 0.3s ease-out' }}
+                    >
+                      <p className="whitespace-pre-line leading-relaxed text-gray-800">{msg.text}</p>
+                      <span className="text-[9px] text-gray-500 float-right mt-1 ml-2 flex items-center gap-1">
+                        {msg.time}
+                        {msg.sender === 'user' && <span className="text-[#53BDEB]">✓✓</span>}
+                      </span>
+                    </div>
+                  ))}
+
+                  {/* Typing Indicator */}
+                  {isTyping && (
+                    <div className="bg-white max-w-[70px] rounded-lg rounded-tl-none p-3 shadow-sm self-start flex gap-1.5 justify-center items-center">
+                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                      <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Input bar iOS */}
+                <div className="bg-[#f6f6f6] border-t border-black/10 px-3 pt-2 pb-1 flex items-center gap-2.5">
+                  <Camera size={22} className="text-[#007AFF] shrink-0" strokeWidth={1.8} />
+                  <div className="flex-1 bg-white rounded-full border border-black/10 px-4 py-[7px] text-[12.5px] text-gray-400">
+                    Escribe un mensaje...
+                  </div>
+                  <Mic size={21} className="text-[#007AFF] shrink-0" strokeWidth={1.8} />
+                </div>
+
+                {/* Home indicator */}
+                <div className="bg-[#f6f6f6] flex justify-center pb-2 pt-1">
+                  <div className="h-[4px] w-32 rounded-full bg-black/85" />
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
