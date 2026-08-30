@@ -1,59 +1,51 @@
 "use client";
 import React from 'react';
-import {
-  Bot, CalendarDays, ClipboardList, FolderOpen, Pill, BellRing,
-  Workflow, BarChart3, Package, MessageCircle, IdCard, CheckCircle2,
-} from 'lucide-react';
+import { Bot, CheckCircle2 } from 'lucide-react';
 
 /**
- * Vitrina de la plataforma completa: Clidenta no es solo la recepcionista IA,
- * es el software integral de la clínica. Bento premium (teal + gold).
+ * Vitrina de la plataforma: card hero para la Recepcionista IA + índice
+ * editorial numerado de los módulos (tipografía, no cajitas — premium).
  */
-const FEATURES = [
+const MODULES = [
   {
-    icon: CalendarDays,
     title: 'Agenda inteligente',
     description: 'Calendario semanal por doctor. Las citas que agenda la IA aparecen al instante, sin sobrecupos.',
   },
   {
-    icon: ClipboardList,
     title: 'Odontograma premium',
-    description: 'Charting por caras (M/D/V/L/O), historial versionado, periodontograma y presupuesto desde el hallazgo.',
+    description: 'Charting por caras, historial versionado, periodontograma y presupuesto desde el hallazgo.',
   },
   {
-    icon: FolderOpen,
     title: 'Historias y archivos',
     description: 'Fotos, audios, consentimientos y documentos de cada paciente, organizados y seguros.',
   },
   {
-    icon: IdCard,
     title: 'Pacientes con DNI',
     description: 'Escribe el DNI y los datos se autocompletan con RENIEC. Alta de pacientes en segundos.',
   },
   {
-    icon: Pill,
     title: 'Recetas digitales',
     description: 'Vademécum odontológico con alertas de interacciones y alergias. Lista para imprimir y firmar.',
   },
   {
-    icon: BellRing,
     title: 'Recordatorios automáticos',
     description: 'Confirmaciones por WhatsApp que reducen inasistencias: citas, controles, cumpleaños y reactivación.',
   },
   {
-    icon: Workflow,
     title: 'Flujos sin código',
     description: 'Diseña menús y respuestas automáticas con un editor visual. Tu WhatsApp trabaja con tus reglas.',
   },
   {
-    icon: BarChart3,
     title: 'Finanzas y productividad',
     description: 'Presupuestos, pagos, comisiones por doctor y analítica clínica para decidir con números.',
   },
   {
-    icon: Package,
     title: 'Inventario y laboratorio',
     description: 'Stock con alertas y trabajos de laboratorio con seguimiento. Nada se pierde en el camino.',
+  },
+  {
+    title: 'CRM de conversaciones',
+    description: 'WhatsApp e Instagram en una sola bandeja. Ve lo que respondió la IA y retoma cuando quieras.',
   },
 ];
 
@@ -71,25 +63,26 @@ const Help: React.FC = () => {
   };
 
   return (
-    <section id="help" className="bg-background py-20 px-4 border-t border-border/60">
-      <div className="max-w-6xl mx-auto">
+    <section id="help" className="bg-background py-24 px-4 border-t border-border/60">
+      <div className="max-w-5xl mx-auto">
 
-        <div className="text-center mb-4">
-          <span className="inline-block rounded-full bg-accent text-accent-foreground text-xs font-semibold tracking-wide uppercase px-4 py-1.5 mb-4">
+        <div className="text-center mb-14">
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
             La plataforma completa
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-slate-900">
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-slate-900 leading-tight">
             Mucho más que una recepcionista:{' '}
             <span className="text-primary">todo tu consultorio en un solo lugar</span>
           </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto mt-4 text-lg">
+          <p className="text-slate-600 max-w-2xl mx-auto mt-5 text-lg">
             La IA atiende y agenda; el software gestiona tu clínica de punta a punta.
             Todo conectado, todo incluido.
           </p>
         </div>
 
         {/* Card hero: Recepcionista IA */}
-        <div className="mt-12 mb-6 rounded-2xl bg-gradient-to-br from-teal-800 to-teal-900 text-white p-8 md:p-10 shadow-md relative overflow-hidden">
+        <div className="mb-16 rounded-2xl bg-gradient-to-br from-teal-800 to-teal-900 text-white p-8 md:p-10 shadow-md relative overflow-hidden">
+          <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent" />
           <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-2xl" />
           <div className="grid md:grid-cols-2 gap-8 items-center relative">
             <div>
@@ -120,41 +113,29 @@ const Help: React.FC = () => {
           </div>
         </div>
 
-        {/* Grid de módulos */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
-          {FEATURES.map((f) => (
+        {/* Índice editorial de módulos */}
+        <div className="grid md:grid-cols-2 gap-x-16 border-t border-slate-200">
+          {MODULES.map((m, i) => (
             <div
-              key={f.title}
-              className="bg-white border border-border rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-primary/25 transition-all duration-300 group"
+              key={m.title}
+              className="group grid grid-cols-[2.75rem_1fr] gap-x-2 py-7 border-b border-slate-200"
             >
-              <div className="h-11 w-11 rounded-xl bg-accent text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                <f.icon size={22} strokeWidth={1.8} />
+              <span className="font-serif text-[15px] text-gold tabular-nums pt-[3px] select-none">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <div>
+                <h3 className="font-serif text-xl md:text-[1.35rem] font-semibold text-slate-900 group-hover:text-primary transition-colors duration-200">
+                  {m.title}
+                </h3>
+                <p className="text-[15px] text-slate-500 mt-1.5 leading-relaxed max-w-md">
+                  {m.description}
+                </p>
               </div>
-              <h3 className="font-serif font-semibold text-lg text-slate-900 mb-2">
-                {f.title}
-              </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                {f.description}
-              </p>
             </div>
           ))}
         </div>
 
-        {/* CRM strip */}
-        <div className="rounded-2xl border border-border bg-white p-6 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-4 mb-12">
-          <div className="h-11 w-11 rounded-xl bg-accent text-primary flex items-center justify-center shrink-0">
-            <MessageCircle size={22} strokeWidth={1.8} />
-          </div>
-          <div className="flex-1">
-            <h3 className="font-serif font-semibold text-lg text-slate-900">CRM de conversaciones incluido</h3>
-            <p className="text-sm text-slate-600">
-              WhatsApp e Instagram en una sola bandeja. Ve lo que respondió la IA, retoma cuando quieras
-              y clasifica leads por etapa.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-14">
           <button
             onClick={scrollToCalendar}
             className="bg-primary text-primary-foreground font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
