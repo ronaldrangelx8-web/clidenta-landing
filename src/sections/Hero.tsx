@@ -1,9 +1,34 @@
 "use client";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '@/components/Logo';
 import { Sparkles, ArrowDown } from 'lucide-react';
 
+/** ISO country code → "Perú 🇵🇪" (nombre en español + bandera regional). */
+function countryLabel(code: string): string {
+  try {
+    const name = new Intl.DisplayNames(['es'], { type: 'region' }).of(code) || code;
+    const flag = code
+      .toUpperCase()
+      .replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0)));
+    return `${name} ${flag}`;
+  } catch {
+    return 'Perú 🇵🇪';
+  }
+}
+
 const Hero: React.FC = () => {
+  // Geolocalización por IP para personalizar el badge (fallback: Perú).
+  const [geo, setGeo] = useState('Perú 🇵🇪');
+
+  useEffect(() => {
+    fetch('https://api.country.is/')
+      .then((r) => r.json())
+      .then((d) => {
+        if (d?.country) setGeo(countryLabel(d.country));
+      })
+      .catch(() => {});
+  }, []);
+
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -24,7 +49,7 @@ const Hero: React.FC = () => {
         <div className="flex justify-center mb-6">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-white px-4 py-1.5 text-xs sm:text-sm font-medium text-primary shadow-sm">
             <Sparkles size={14} className="text-gold" />
-            Software de gestión dental + Recepcionista IA · Perú y LATAM
+            Sistema de gestión dental + Recepcionista IA · {geo}
           </span>
         </div>
 
@@ -47,19 +72,13 @@ const Hero: React.FC = () => {
           prepárate para sorprenderte.
         </p>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-10">
+        {/* CTA */}
+        <div className="flex justify-center mb-10">
           <button
             onClick={() => scrollTo('agenda')}
-            className="w-full sm:w-auto bg-primary text-primary-foreground font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
+            className="w-full sm:w-auto bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
           >
             Agendar demostración gratis
-          </button>
-          <button
-            onClick={() => scrollTo('help')}
-            className="w-full sm:w-auto text-primary font-semibold px-8 py-3.5 rounded-xl border border-primary/20 bg-white hover:border-primary/40 hover:bg-accent/50 transition-all duration-300 text-lg"
-          >
-            Ver todo lo que incluye
           </button>
         </div>
 

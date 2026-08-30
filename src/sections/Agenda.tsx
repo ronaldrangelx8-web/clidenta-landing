@@ -5,7 +5,7 @@ import Cal, { getCalApi } from "@calcom/embed-react";
 const Agenda: React.FC = () => {
   useEffect(() => {
     (async function () {
-      const cal = await getCalApi({ namespace: "reunion-clidenta" });
+      const cal = await getCalApi({ namespace: "30min" });
       cal("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view" });
     })();
   }, []);
@@ -22,8 +22,8 @@ const Agenda: React.FC = () => {
         <div className="rounded-2xl border border-border bg-white shadow-sm p-2 sm:p-4">
           <div style={{ width: '100%', minHeight: '600px' }}>
             <Cal
-              namespace="reunion-clidenta"
-              calLink="rangel/reunion-clidenta"
+              namespace="30min"
+              calLink="veronica-garcia/30min"
               style={{ width: "100%", height: "100%", overflow: "scroll" }}
               config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true", theme: "light" }}
             />
