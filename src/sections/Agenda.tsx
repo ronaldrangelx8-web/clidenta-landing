@@ -11,18 +11,23 @@ const Agenda: React.FC = () => {
   }, []);
 
   return (
-    <section id="agenda" className="bg-[#fff7eb] pt-2 pb-12 px-4">
+    <section id="agenda" className="bg-background pt-2 pb-14 px-4">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-xl md:text-2xl font-serif font-semibold text-[#262a2e] mb-4 text-center">
+        <h2 className="text-2xl md:text-3xl font-serif font-semibold text-slate-900 mb-2 text-center">
           Agenda tu demostración gratuita
         </h2>
-        <div style={{ width: '100%', minHeight: '600px' }}>
-          <Cal
-            namespace="reunion-clidenta"
-            calLink="rangel/reunion-clidenta"
-            style={{ width: "100%", height: "100%", overflow: "scroll" }}
-            config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true", theme: "light" }}
-          />
+        <p className="text-center text-slate-500 mb-6">
+          30 minutos, sin compromiso. Te mostramos tu clínica funcionando con IA.
+        </p>
+        <div className="rounded-2xl border border-border bg-white shadow-sm p-2 sm:p-4">
+          <div style={{ width: '100%', minHeight: '600px' }}>
+            <Cal
+              namespace="reunion-clidenta"
+              calLink="rangel/reunion-clidenta"
+              style={{ width: "100%", height: "100%", overflow: "scroll" }}
+              config={{ layout: "month_view", useSlotsViewOnSmallScreen: "true", theme: "light" }}
+            />
+          </div>
         </div>
       </div>
     </section>

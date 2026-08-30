@@ -16,16 +16,20 @@ const FAQ: React.FC = () => {
       answer: 'Es una reunión corta donde analizamos tus canales de atención actuales (WhatsApp, Web, redes) y los flujos de preguntas frecuentes. Te mostraremos en vivo cómo estructuraríamos tu recepcionista IA. ¡Te sorprenderás de los resultados!',
     },
     {
+      question: '¿Es solo un chatbot o incluye software de gestión?',
+      answer: 'Clidenta es la plataforma completa de tu clínica: agenda por doctor, historias clínicas, odontograma digital con historial, recetas, recordatorios, finanzas, inventario y laboratorio. La recepcionista IA vive dentro del software, por eso conoce tus precios, horarios y pacientes — no es un bot genérico.',
+    },
+    {
       question: '¿En qué canales se puede integrar el recepcionista IA?',
       answer: 'Podemos integrarlo en tu número de WhatsApp Business, tus cuentas de Instagram y Facebook Messenger, o directamente como un widget de chat en tu sitio web. Las respuestas se adaptan a cada plataforma.',
     },
     {
       question: '¿Se conecta con mi calendario o CRM actual?',
-      answer: 'Sí. Tu recepcionista IA puede consultar tu disponibilidad en tiempo real y agendar citas directamente en herramientas como Google Calendar, Outlook, Cal.com, Calendly o tu CRM/software administrativo mediante integraciones personalizadas.',
+      answer: 'Sí. Tu recepcionista IA agenda directamente en el calendario de Clidenta y puede sincronizarse con herramientas como Google Calendar, Outlook, Cal.com o tu CRM actual mediante integraciones personalizadas.',
     },
     {
       question: '¿Qué pasa si la IA no sabe responder una pregunta?',
-      answer: 'El asistente de IA responderá con base en las reglas de tu negocio. Si detecta una solicitud compleja o si el cliente pide explícitamente hablar con una persona, transferirá el chat de inmediato a tu equipo humano notificándoles al instante.',
+      answer: 'El asistente de IA responderá con base en las reglas de tu negocio. Si detecta una solicitud compleja o si el paciente pide explícitamente hablar con una persona, transferirá el chat de inmediato a tu equipo humano notificándoles al instante.',
     },
   ];
 
@@ -34,7 +38,7 @@ const FAQ: React.FC = () => {
   };
 
   return (
-    <section id="faq" className="bg-[#033754] py-20 px-4 text-white">
+    <section id="faq" className="bg-gradient-to-b from-teal-800 to-teal-900 py-20 px-4 text-white">
       <div className="max-w-3xl mx-auto">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-center mb-16">
           Preguntas frecuentes
@@ -44,15 +48,15 @@ const FAQ: React.FC = () => {
           {faqs.map((faq, index) => (
             <div
               key={index}
-              className="bg-[#fff7eb] border border-white/10 rounded-lg overflow-hidden transition-all duration-300"
+              className="bg-white rounded-2xl overflow-hidden shadow-sm transition-all duration-300"
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-[#fff7eb]/90 transition-colors"
+                className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-accent/40 transition-colors"
               >
-                <span className="text-[#262a2e] font-serif font-semibold text-lg">{faq.question}</span>
+                <span className="text-slate-900 font-serif font-semibold text-lg">{faq.question}</span>
                 <ChevronDown
-                  className={`w-5 h-5 text-[#033754] transition-transform duration-300 flex-shrink-0 ml-4 ${
+                  className={`w-5 h-5 text-primary transition-transform duration-300 flex-shrink-0 ml-4 ${
                     openIndex === index ? 'rotate-180' : ''
                   }`}
                 />
@@ -62,7 +66,7 @@ const FAQ: React.FC = () => {
                   openIndex === index ? 'max-h-96' : 'max-h-0'
                 }`}
               >
-                <div className="px-6 pb-5 text-[#262a2e]/90 leading-relaxed border-t border-[#033754]/10 pt-4">
+                <div className="px-6 pb-5 text-slate-600 leading-relaxed border-t border-border pt-4">
                   {faq.answer}
                 </div>
               </div>
@@ -73,9 +77,9 @@ const FAQ: React.FC = () => {
         <div className="flex justify-center">
           <button
             onClick={scrollToCalendar}
-            className="bg-[#fff7eb] text-[#033754] font-semibold px-8 py-3.5 rounded-lg border border-[#fff7eb] hover:bg-transparent hover:text-[#fff7eb] transition-all duration-300 text-lg"
+            className="bg-gold text-white font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-gold/90 hover:shadow transition-all duration-300 text-lg"
           >
-            Quiero más información
+            Agendar mi demostración
           </button>
         </div>
       </div>

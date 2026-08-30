@@ -64,9 +64,9 @@ const duplicatedReviews = [...reviews, ...reviews, ...reviews, ...reviews];
 
 const ReviewsMarquee: React.FC = () => {
   return (
-    <section className="bg-[#fff7eb] pb-16 overflow-hidden">
+    <section className="bg-background pb-16 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 mb-8">
-        <p className="text-center text-xl md:text-2xl font-serif text-[#262a2e] font-semibold">
+        <p className="text-center text-xl md:text-2xl font-serif text-slate-900 font-semibold">
           Resultados comprobados por especialistas de la salud dental
         </p>
       </div>
@@ -74,44 +74,44 @@ const ReviewsMarquee: React.FC = () => {
       {/* Infinite Scroll Container */}
       <div className="relative w-full flex items-center justify-start overflow-x-hidden py-4">
         {/* Left Gradient Shadow */}
-        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-[#fff7eb] to-transparent z-10 pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         
         {/* Infinite Scroll Track */}
         <div className="flex gap-6 animate-marquee whitespace-normal min-w-max hover:[animation-play-state:paused] cursor-pointer">
           {duplicatedReviews.map((review, idx) => (
             <div
               key={`${review.id}-${idx}`}
-              className="w-[300px] md:w-[360px] bg-white border border-[#033754]/10 rounded-xl p-6 md:p-8 shadow-sm flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02]"
+              className="w-[300px] md:w-[360px] bg-white border border-border rounded-2xl p-6 md:p-8 shadow-sm flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02]"
             >
               <div>
                 <div className="flex justify-between items-center mb-4">
-                  <div className="flex gap-1 text-amber-500">
+                  <div className="flex gap-1 text-gold">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} size={16} fill="currentColor" className="text-amber-500" />
+                      <Star key={i} size={16} fill="currentColor" className="text-gold" />
                     ))}
                   </div>
-                  <Quote size={24} className="text-[#033754]/10" />
+                  <Quote size={24} className="text-primary/10" />
                 </div>
                 
-                <p className="text-[#262a2e]/90 text-sm md:text-base leading-relaxed mb-6 font-sans font-normal">
+                <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-6 font-sans font-normal">
                   "{review.quote}"
                 </p>
               </div>
 
-              <div className="border-t border-[#033754]/5 pt-4 mt-auto flex items-center gap-3">
+              <div className="border-t border-border/60 pt-4 mt-auto flex items-center gap-3">
                 <img
                   src={review.avatar}
                   alt={review.name}
-                  className="w-10 h-10 rounded-full object-cover shrink-0 shadow-md border-2 border-[#033754]/10"
+                  className="w-10 h-10 rounded-full object-cover shrink-0 shadow-md border-2 border-border"
                 />
                 <div>
-                  <h3 className="font-serif font-bold text-base text-[#262a2e]">
+                  <h3 className="font-serif font-semibold text-base text-slate-900">
                     {review.name}
                   </h3>
-                  <p className="text-xs text-[#033754] font-medium mb-1">
+                  <p className="text-xs text-primary font-medium mb-1">
                     {review.title}
                   </p>
-                  <span className="inline-block text-[10px] text-[#262a2e]/75 bg-[#fff7eb] px-2.5 py-1 rounded-md border border-[#033754]/5">
+                  <span className="inline-block text-[10px] text-slate-500 bg-accent/60 px-2.5 py-1 rounded-md border border-border/60">
                     {review.experience}
                   </span>
                 </div>
@@ -121,7 +121,7 @@ const ReviewsMarquee: React.FC = () => {
         </div>
 
         {/* Right Gradient Shadow */}
-        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-[#fff7eb] to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
       </div>
     </section>
   );

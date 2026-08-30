@@ -24,27 +24,32 @@ const Steps: React.FC = () => {
     {
       number: '3',
       title: 'Lanzamiento en 7 Días',
-      description: 'Conectamos a tu nuevo recepcionista IA a tu número de WhatsApp o sitio web, listo para capturar y agendar clientes 24/7.',
+      description: 'Conectamos tu nuevo recepcionista IA a tu WhatsApp con tu clínica ya montada en el software, listo para capturar y agendar pacientes 24/7.',
       icon: Rocket,
     },
   ];
 
   return (
-    <section id="steps" className="bg-[#fff7eb] py-20 px-4">
+    <section id="steps" className="bg-background py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-[#262a2e] text-center mb-16">
-          Lo hacemos en 3 simples pasos
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-slate-900 text-center mb-16">
+          Lo hacemos en <span className="text-primary">3 simples pasos</span>
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-12 mb-16">
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
           {steps.map((step, index) => (
-            <div key={index} className="text-center px-4 flex flex-col items-center">
-              <div className="text-7xl font-serif font-bold text-[#033754] mb-4 opacity-30">{step.number}</div>
-              <div className="flex justify-center mb-4 p-3 bg-[#033754]/5 rounded-full text-[#033754]">
-                <step.icon className="w-8 h-8" strokeWidth={1.5} />
+            <div
+              key={index}
+              className="relative bg-white border border-border rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 text-center flex flex-col items-center"
+            >
+              <div className="absolute top-6 right-7 font-serif text-5xl font-semibold text-gold/25 select-none">
+                {step.number}
               </div>
-              <h3 className="text-xl font-serif font-semibold text-[#262a2e] mb-3">{step.title}</h3>
-              <p className="text-[#262a2e]/80 leading-relaxed max-w-sm">{step.description}</p>
+              <div className="flex justify-center mb-5 p-3.5 bg-accent rounded-2xl text-primary">
+                <step.icon className="w-8 h-8" strokeWidth={1.6} />
+              </div>
+              <h3 className="text-xl font-serif font-semibold text-slate-900 mb-3">{step.title}</h3>
+              <p className="text-slate-600 leading-relaxed max-w-sm">{step.description}</p>
             </div>
           ))}
         </div>
@@ -52,7 +57,7 @@ const Steps: React.FC = () => {
         <div className="flex justify-center">
           <button
             onClick={scrollToCalendar}
-            className="bg-[#033754] text-white font-semibold px-8 py-3.5 rounded-lg border border-[#033754] hover:bg-transparent hover:text-[#033754] transition-all duration-300 text-lg"
+            className="bg-primary text-primary-foreground font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
           >
             Quiero más información
           </button>

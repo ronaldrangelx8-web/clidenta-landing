@@ -46,57 +46,57 @@ const Portfolio: React.FC = () => {
   };
 
   return (
-    <section id="portfolio" className="bg-[#fff7eb] py-20 px-4 border-t border-[#033754]/5">
+    <section id="portfolio" className="bg-background py-20 px-4 border-t border-border/60">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-[#262a2e] mt-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-slate-900 mt-4">
             Lo que dicen nuestros clientes
           </h2>
-          <p className="text-[#262a2e]/70 mt-3">
+          <p className="text-slate-600 mt-3">
             Descubre cómo Clidenta transforma la atención diaria de clínicas y odontólogos destacados.
           </p>
         </div>
 
         {/* Carousel Container */}
-        <div className="relative bg-white border border-[#033754]/10 rounded-lg p-8 md:p-12 shadow-sm min-h-[300px] flex flex-col justify-between">
+        <div className="relative bg-white border border-border rounded-2xl p-8 md:p-12 shadow-sm min-h-[300px] flex flex-col justify-between">
           
           {/* Quote Icon */}
-          <div className="absolute top-6 right-8 text-[#033754]/5">
+          <div className="absolute top-6 right-8 text-primary/5">
             <Quote size={80} strokeWidth={1} />
           </div>
 
           {/* Active Review */}
           <div className="relative z-10">
             {/* Stars */}
-            <div className="flex gap-1 mb-6 text-amber-500">
+            <div className="flex gap-1 mb-6 text-gold">
               {[...Array(reviews[currentIndex].rating)].map((_, i) => (
                 <Star key={i} size={18} fill="currentColor" />
               ))}
             </div>
 
             {/* Testimonial Quote */}
-            <blockquote className="text-lg md:text-xl text-[#262a2e] font-sans font-normal italic leading-relaxed mb-8">
+            <blockquote className="text-lg md:text-xl text-slate-700 font-sans font-normal italic leading-relaxed mb-8">
               "{reviews[currentIndex].quote}"
             </blockquote>
 
             {/* Author details */}
-            <div className="border-t border-[#033754]/10 pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="border-t border-border pt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
               <div>
-                <h3 className="font-serif font-semibold text-lg text-[#262a2e]">
+                <h3 className="font-serif font-semibold text-lg text-slate-900">
                   {reviews[currentIndex].name}
                 </h3>
-                <p className="text-sm text-[#033754] font-medium">
+                <p className="text-sm text-primary font-medium">
                   {reviews[currentIndex].title}
                 </p>
               </div>
-              <div className="text-xs text-[#262a2e]/75 bg-[#fff7eb] px-3 py-1.5 rounded-md border border-[#033754]/5 self-start sm:self-center">
+              <div className="text-xs text-slate-500 bg-accent/60 px-3 py-1.5 rounded-md border border-border/60 self-start sm:self-center">
                 {reviews[currentIndex].experience}
               </div>
             </div>
           </div>
 
           {/* Navigation Controls */}
-          <div className="flex justify-between items-center mt-10 pt-4 border-t border-[#033754]/5 relative z-10">
+          <div className="flex justify-between items-center mt-10 pt-4 border-t border-border/60 relative z-10">
             {/* Dots */}
             <div className="flex gap-2">
               {reviews.map((_, idx) => (
@@ -108,7 +108,7 @@ const Portfolio: React.FC = () => {
                 >
                   <div
                     className={`h-2.5 rounded-full transition-all duration-300 ${
-                      currentIndex === idx ? 'bg-[#033754] w-6' : 'bg-[#033754]/20 w-2.5'
+                      currentIndex === idx ? 'bg-primary w-6' : 'bg-primary/20 w-2.5'
                     }`}
                   />
                 </button>
@@ -119,14 +119,14 @@ const Portfolio: React.FC = () => {
             <div className="flex gap-3">
               <button
                 onClick={prevSlide}
-                className="p-2.5 rounded-lg border border-[#033754]/10 text-[#033754] bg-[#fff7eb] hover:bg-[#033754] hover:text-white hover:border-[#033754] transition-all duration-300"
+                className="p-2.5 rounded-lg border border-border text-primary bg-white hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
                 aria-label="Previous slide"
               >
                 <ChevronLeft size={20} />
               </button>
               <button
                 onClick={nextSlide}
-                className="p-2.5 rounded-lg border border-[#033754]/10 text-[#033754] bg-[#fff7eb] hover:bg-[#033754] hover:text-white hover:border-[#033754] transition-all duration-300"
+                className="p-2.5 rounded-lg border border-border text-primary bg-white hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
                 aria-label="Next slide"
               >
                 <ChevronRight size={20} />
@@ -140,7 +140,7 @@ const Portfolio: React.FC = () => {
         <div className="flex justify-center mt-12">
           <button
             onClick={scrollToCalendar}
-            className="bg-[#033754] text-white font-semibold px-8 py-3.5 rounded-lg border border-[#033754] hover:bg-transparent hover:text-[#033754] transition-all duration-300 text-lg"
+            className="bg-primary text-primary-foreground font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
           >
             Quiero agendar pacientes
           </button>

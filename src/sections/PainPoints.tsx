@@ -91,10 +91,10 @@ const PainPoints: React.FC = () => {
   }, [stepIndex]);
 
   return (
-    <section id="pain-points" className="bg-[#033754] py-20 px-4 text-white">
+    <section id="pain-points" className="bg-gradient-to-b from-teal-800 to-teal-900 py-20 px-4 text-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-center mb-16">
-          Esto te está pasando <span className="text-[#ff6b4a]">ahora mismo</span>
+          Esto te está pasando <span className="text-gold">ahora mismo</span>
         </h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -102,7 +102,7 @@ const PainPoints: React.FC = () => {
           <div className="space-y-6">
             {painPoints.map((point, index) => (
               <div key={index} className="flex items-start gap-4">
-                <span className="text-[#fff7eb] bg-white/10 rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-0.5">✕</span>
+                <span className="text-amber-300 bg-white/10 rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-0.5">✕</span>
                 <p className="text-white/90 text-lg leading-relaxed">{point}</p>
               </div>
             ))}
@@ -181,7 +181,7 @@ const PainPoints: React.FC = () => {
         <div className="flex justify-center mt-16">
           <button
             onClick={scrollToCalendar}
-            className="bg-[#fff7eb] text-[#033754] font-semibold px-8 py-3.5 rounded-lg border border-[#fff7eb] hover:bg-transparent hover:text-[#fff7eb] transition-all duration-300 text-lg"
+            className="bg-gold text-white font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-gold/90 hover:shadow transition-all duration-300 text-lg"
           >
             Quiero más información
           </button>

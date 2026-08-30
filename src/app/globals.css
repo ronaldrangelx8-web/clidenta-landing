@@ -2,36 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Lenguaje visual Clidenta (mismos tokens que la app): teal profundo como
+   marca/acción, gold como acento premium, fondo blanco cálido. */
 @layer base {
   :root {
-    --background: 36 100% 96.1%; /* #fff7eb */
-    --foreground: 210 10% 16.5%; /* #262a2e */
-    --card: 36 100% 98%;
-    --card-foreground: 210 10% 16.5%;
-    --popover: 36 100% 96.1%;
-    --popover-foreground: 210 10% 16.5%;
-    --primary: 201 93% 17.1%; /* #033754 */
-    --primary-foreground: 36 100% 96.1%; /* #fff7eb */
-    --secondary: 210 10% 25%;
-    --secondary-foreground: 36 100% 96.1%;
-    --muted: 36 40% 90%;
-    --muted-foreground: 210 10% 45%;
-    --accent: 36 40% 90%;
-    --accent-foreground: 201 93% 17.1%;
+    --background: 40 33% 98%;
+    --foreground: 215 25% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 215 25% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 25% 17%;
+    --primary: 174 71% 20%;
+    --primary-foreground: 40 33% 98%;
+    --secondary: 174 30% 92%;
+    --secondary-foreground: 174 71% 20%;
+    --muted: 174 12% 94%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 174 30% 92%;
+    --accent-foreground: 174 71% 20%;
+    --gold: 45 68% 47%; /* #C9A227 */
+    --gold-foreground: 40 33% 98%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 36 20% 85%;
-    --input: 36 20% 85%;
-    --ring: 201 93% 17.1%;
-    --radius: 0.5rem;
-    --sidebar-background: 36 100% 96.1%;
-    --sidebar-foreground: 210 10% 16.5%;
-    --sidebar-primary: 201 93% 17.1%;
-    --sidebar-primary-foreground: 36 100% 96.1%;
-    --sidebar-accent: 36 40% 90%;
-    --sidebar-accent-foreground: 201 93% 17.1%;
-    --sidebar-border: 36 20% 85%;
-    --sidebar-ring: 201 93% 17.1%;
+    --border: 210 20% 90%;
+    --input: 210 20% 90%;
+    --ring: 174 71% 20%;
+    --radius: 0.75rem;
+    --sidebar-background: 40 33% 98%;
+    --sidebar-foreground: 215 25% 17%;
+    --sidebar-primary: 174 71% 20%;
+    --sidebar-primary-foreground: 40 33% 98%;
+    --sidebar-accent: 174 30% 92%;
+    --sidebar-accent-foreground: 174 71% 20%;
+    --sidebar-border: 210 20% 90%;
+    --sidebar-ring: 174 71% 20%;
   }
 }
 
@@ -40,14 +44,19 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
-    font-family: 'DM Sans', sans-serif;
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Lexend', sans-serif;
-    font-weight: 700;
+    font-family: var(--font-fraunces), 'Fraunces', Georgia, serif;
+    font-weight: 600;
   }
   html {
     scroll-behavior: smooth;
   }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }

@@ -1,6 +1,12 @@
 "use client";
 import React from 'react';
 
+const STATS = [
+  { value: '100+', label: 'integraciones y desarrollos' },
+  { value: '24/7', label: 'atención sin descanso' },
+  { value: '7 días', label: 'de la firma al lanzamiento' },
+];
+
 const Trust: React.FC = () => {
   const scrollToCalendar = () => {
     const el = document.getElementById('agenda');
@@ -8,30 +14,41 @@ const Trust: React.FC = () => {
   };
 
   return (
-    <section id="trust" className="bg-[#fff7eb] py-20 px-4 border-t border-[#033754]/5">
+    <section id="trust" className="bg-background py-20 px-4 border-t border-border/60">
       <div className="max-w-5xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-[#262a2e] mb-8">
-          ¿Por qué confiar en Clidenta?
+        <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-slate-900 mb-10">
+          ¿Por qué confiar en <span className="text-primary">Clidenta</span>?
         </h2>
 
-        <div className="max-w-4xl mx-auto space-y-6 text-left md:text-center">
-          <p className="text-lg text-[#262a2e]/90 leading-relaxed max-w-3xl mx-auto">
-            Nuestro equipo es experto en el diseño e integración de Inteligencia Artificial para atención y ventas, logrando una automatización fluida con las herramientas que ya utilizas en tu negocio.
-          </p>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-12">
+          {STATS.map((s) => (
+            <div key={s.label} className="rounded-2xl border border-border bg-white p-6 shadow-sm">
+              <div className="font-serif text-3xl font-semibold text-primary mb-1">{s.value}</div>
+              <div className="text-sm text-slate-500">{s.label}</div>
+            </div>
+          ))}
+        </div>
 
-          <p className="text-lg text-[#262a2e]/90 leading-relaxed max-w-3xl mx-auto">
-            Con más de 100 integraciones y desarrollos exitosos, ayudamos a negocios de servicios, clínicas y comercios a responder al instante a sus prospectos sin perder la calidez humana.
+        <div className="max-w-3xl mx-auto space-y-5">
+          <p className="text-lg text-slate-600 leading-relaxed">
+            Nuestro equipo es experto en el diseño e integración de Inteligencia Artificial para
+            atención y ventas, logrando una automatización fluida con las herramientas que ya
+            utilizas en tu negocio.
           </p>
-
-          <p className="text-lg text-[#262a2e]/90 leading-relaxed max-w-3xl mx-auto mb-10">
-            Todos nuestros desarrollos se entregan llave en mano, garantizando el control absoluto de tus canales y datos, e incluyendo soporte continuo de optimización.
+          <p className="text-lg text-slate-600 leading-relaxed">
+            Con más de 100 integraciones y desarrollos exitosos, ayudamos a clínicas y consultorios
+            a responder al instante a sus pacientes sin perder la calidez humana.
+          </p>
+          <p className="text-lg text-slate-600 leading-relaxed">
+            Todos nuestros desarrollos se entregan llave en mano, garantizando el control absoluto
+            de tus canales y datos, e incluyendo soporte continuo de optimización.
           </p>
         </div>
 
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-12">
           <button
             onClick={scrollToCalendar}
-            className="bg-[#033754] text-white font-semibold px-8 py-3.5 rounded-lg border border-[#033754] hover:bg-transparent hover:text-[#033754] transition-all duration-300 text-lg"
+            className="bg-primary text-primary-foreground font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
           >
             Quiero más información
           </button>

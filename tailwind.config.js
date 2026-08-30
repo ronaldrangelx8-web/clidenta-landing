@@ -5,15 +5,19 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Lexend", "sans-serif"],
+        serif: ["var(--font-fraunces)", "Fraunces", "Georgia", "serif"],
         sans: ["'DM Sans'", "sans-serif"],
         fraunces: ["Fraunces", "serif"],
         lexend: ["Lexend", "sans-serif"],
         dmsans: ["'DM Sans'", "sans-serif"],
-        jakarta: ["Lexend", "sans-serif"],
+        display: ["var(--font-fraunces)", "Fraunces", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          foreground: "hsl(var(--gold-foreground))",
+        },
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",

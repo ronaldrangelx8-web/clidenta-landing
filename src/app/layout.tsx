@@ -1,16 +1,15 @@
 import type { Metadata } from 'next';
-import { DM_Sans, Fraunces, Lexend } from 'next/font/google';
+import { DM_Sans, Fraunces } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' });
 const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces' });
-const lexend = Lexend({ subsets: ['latin'], variable: '--font-lexend' });
 
 export const metadata: Metadata = {
   title: 'El Mejor Recepcionista AI para Clínicas | Clidenta',
   description:
-    'Descubre a Clidenta, el mejor recepcionista AI para clínicas odontológicas y médicas en Perú y LATAM. Automatiza la atención al paciente, agenda citas por WhatsApp y responde consultas 24/7 sin esfuerzo.',
+    'Descubre Clidenta: recepcionista IA + software integral para clínicas odontológicas en Perú y LATAM. Agenda, odontograma digital, historias clínicas, recordatorios y atención por WhatsApp 24/7.',
   keywords:
     'el mejor recepcionista AI para clínicas, inteligencia artificial para consultorios, chatbot médico para WhatsApp, agenda de citas médica automatizada, asistente virtual médico, software de recepción dental, Clidenta Perú LATAM',
   authors: [{ name: 'Clidenta' }],
@@ -106,7 +105,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${dmSans.variable} ${fraunces.variable} ${lexend.variable}`}>
+      <body className={`${dmSans.variable} ${fraunces.variable}`}>
         <noscript>
           <img
             height="1"
