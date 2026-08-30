@@ -68,8 +68,6 @@ const Hero: React.FC = () => {
         <p className="font-sans text-center text-lg md:text-xl text-slate-600 max-w-3xl mx-auto mb-9 leading-relaxed">
           Atiende WhatsApp 24/7, agenda citas sola y llega con toda tu clínica integrada:
           agenda, odontograma, historias, recordatorios y finanzas en un solo lugar.
-          Agenda una <span className="text-primary font-semibold">demostración gratis</span> y
-          prepárate para sorprenderte.
         </p>
 
         {/* CTA */}
