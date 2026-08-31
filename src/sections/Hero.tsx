@@ -48,10 +48,12 @@ const Hero: React.FC = () => {
           <Logo />
         </div>
 
-        {/* Eyebrow */}
-        <p className="text-center text-[12px] sm:text-[13px] font-medium tracking-[0.14em] uppercase text-slate-500 mb-6">
-          Atención odontólogos <span className="text-primary">{geo}</span>
-        </p>
+        {/* Eyebrow — ficha roja de alerta */}
+        <div className="flex justify-center mb-6">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-red-600 text-white text-[11px] sm:text-xs font-semibold tracking-[0.12em] uppercase px-4 py-1.5 shadow-sm motion-safe:animate-[vibrate_3s_ease-in-out_infinite]">
+            Atención odontólogos {geo}
+          </span>
+        </div>
 
         {/* Hero Title */}
         <h1 className="text-center text-3xl sm:text-4xl md:text-5xl font-serif font-semibold text-slate-900 leading-[1.15] max-w-4xl mx-auto mb-5">
@@ -74,19 +76,14 @@ const Hero: React.FC = () => {
           <HeroLivePreview />
         </div>
 
-        {/* CTA con badge de urgencia */}
+        {/* CTA */}
         <div className="flex justify-center">
-          <div className="relative inline-block">
-            <span className="absolute -top-2.5 -right-2.5 z-10 rounded-full bg-red-600 text-white text-[11px] font-semibold px-2.5 py-1 shadow-md motion-safe:animate-[vibrate_3s_ease-in-out_infinite]">
-              Cupos limitados
-            </span>
-            <button
-              onClick={() => scrollTo('agenda')}
-              className="w-full sm:w-auto bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
-            >
-              Agendar demostración gratis
-            </button>
-          </div>
+          <button
+            onClick={() => scrollTo('agenda')}
+            className="w-full sm:w-auto bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
+          >
+            Agendar demostración gratis
+          </button>
         </div>
 
         {/* Scroll indicator */}

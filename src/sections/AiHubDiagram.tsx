@@ -1,6 +1,6 @@
 "use client";
 import React from 'react';
-import { Bot, MessageCircle, CalendarDays, Users, Wallet, FolderOpen, Pill } from 'lucide-react';
+import { BrainCircuit, MessageCircle, CalendarDays, Users, Wallet, FolderOpen, Pill } from 'lucide-react';
 
 /**
  * "Orbital" de la IA: el núcleo en el centro y los datos de la clínica en órbita.
@@ -64,7 +64,7 @@ export default function AiHubDiagram() {
           <div className="absolute inset-0 rounded-full ring-1 ring-white/15" />
           {/* Disco del núcleo */}
           <div className="absolute inset-[6px] rounded-full bg-gradient-to-br from-teal-600 to-teal-800 border border-white/20 flex items-center justify-center text-white shadow-lg shadow-black/30">
-            <Bot size={38} strokeWidth={1.5} />
+            <BrainCircuit size={36} strokeWidth={1.5} />
           </div>
         </div>
       </div>
