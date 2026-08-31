@@ -10,15 +10,17 @@ function countryLabel(code: string): string {
     const flag = code
       .toUpperCase()
       .replace(/./g, (c) => String.fromCodePoint(127397 + c.charCodeAt(0)));
-    return `${name} ${flag}`;
+    // "del Perú / del Ecuador", pero "de México / de Chile"…
+    const article = ['PE', 'EC'].includes(code.toUpperCase()) ? 'del' : 'de';
+    return `${article} ${name} ${flag}`;
   } catch {
-    return 'Perú 🇵🇪';
+    return 'del Perú 🇵🇪';
   }
 }
 
 const Hero: React.FC = () => {
   // Geolocalización por IP para personalizar el badge (fallback: Perú).
-  const [geo, setGeo] = useState('Perú 🇵🇪');
+  const [geo, setGeo] = useState('del Perú 🇵🇪');
 
   useEffect(() => {
     fetch('https://api.country.is/')
@@ -47,14 +49,15 @@ const Hero: React.FC = () => {
 
         {/* Eyebrow */}
         <p className="text-center text-[12px] sm:text-[13px] font-medium tracking-[0.14em] uppercase text-slate-500 mb-6">
-          Sistema de gestión dental + Recepcionista IA · <span className="text-primary">{geo}</span>
+          Atención odontólogos <span className="text-primary">{geo}</span>
         </p>
 
-        {/* Hero Title — corto, 2 líneas máx en desktop */}
-        <h1 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] font-serif font-semibold text-slate-900 leading-[1.12] max-w-3xl mx-auto mb-5">
-          Aumenta tu facturación <span className="text-primary">hasta un 60%</span> con una{' '}
+        {/* Hero Title */}
+        <h1 className="text-center text-3xl sm:text-4xl md:text-5xl font-serif font-semibold text-slate-900 leading-[1.15] max-w-4xl mx-auto mb-5">
+          Aumenta la facturación de tu Clínica Dental{' '}
+          <span className="text-primary">hasta un 60%</span> con una{' '}
           <span className="relative whitespace-nowrap text-primary">
-            recepcionista IA
+            Recepcionista IA
             <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gold/70" />
           </span>
         </h1>
@@ -65,18 +68,8 @@ const Hero: React.FC = () => {
           Lista en <span className="text-primary font-semibold">7 días</span>.
         </p>
 
-        {/* CTA */}
-        <div className="flex justify-center mb-12">
-          <button
-            onClick={() => scrollTo('agenda')}
-            className="w-full sm:w-auto bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
-          >
-            Agendar demostración gratis
-          </button>
-        </div>
-
         {/* Producto real: la agenda de Clidenta */}
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto mb-10">
           <div className="rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-2xl shadow-primary/10 bg-white">
             {/* Barra de navegador */}
             <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-100 border-b border-slate-200/80">
@@ -94,9 +87,16 @@ const Hero: React.FC = () => {
               loading="eager"
             />
           </div>
-          <p className="text-center text-sm text-slate-400 mt-3">
-            Tu agenda real: las citas que cierra la IA aparecen al instante.
-          </p>
+        </div>
+
+        {/* CTA */}
+        <div className="flex justify-center">
+          <button
+            onClick={() => scrollTo('agenda')}
+            className="w-full sm:w-auto bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
+          >
+            Agendar demostración gratis
+          </button>
         </div>
 
         {/* Scroll indicator */}

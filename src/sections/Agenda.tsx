@@ -17,7 +17,7 @@ const Agenda: React.FC = () => {
           Agenda tu demostración gratuita
         </h2>
         <p className="text-center text-slate-500 mb-6">
-          30 minutos, sin compromiso. Te mostramos tu clínica funcionando con IA.
+          30 minutos, sin compromiso. Te mostramos cómo tu clínica funcionaría con IA.
         </p>
         <div className="rounded-2xl border border-border bg-white shadow-sm p-2 sm:p-4">
           <div style={{ width: '100%', minHeight: '600px' }}>
