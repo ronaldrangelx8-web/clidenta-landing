@@ -1,16 +1,17 @@
 "use client";
 import React from 'react';
+import AiHubDiagram from './AiHubDiagram';
 
 /**
- * Vitrina de la plataforma: menos texto, más producto. Card hero de la IA,
- * dos módulos estrella con captura real y un índice compacto para el resto.
+ * Vitrina de la plataforma: card hero de la IA con diagrama de conexión,
+ * dos módulos estrella con captura real y una grilla de módulos.
  */
 const MODULES = [
   { title: 'Historias y archivos', description: 'Fotos, audios y documentos de cada paciente.' },
-  { title: 'Pacientes con DNI', description: 'Datos autocompletados con RENIEC en segundos.' },
+  { title: 'Pacientes en segundos', description: 'Ficha completa con autocompletado de datos.' },
   { title: 'Recetas digitales', description: 'Vademécum con alertas de interacciones.' },
   { title: 'Recordatorios automáticos', description: 'Confirmaciones por WhatsApp, menos inasistencias.' },
-  { title: 'Flujos sin código', description: 'Menús y respuestas automáticas con editor visual.' },
+  { title: 'Automatización sin código', description: 'Respuestas y menús automáticos, listos al instante.' },
   { title: 'Finanzas y productividad', description: 'Presupuestos, pagos y comisiones por doctor.' },
   { title: 'Inventario y laboratorio', description: 'Stock con alertas y trabajos con seguimiento.' },
   { title: 'CRM de conversaciones', description: 'WhatsApp e Instagram en una sola bandeja.' },
@@ -57,11 +58,11 @@ const Help: React.FC = () => {
           </p>
         </div>
 
-        {/* Card hero: Recepcionista IA */}
+        {/* Card hero: Recepcionista IA con diagrama de conexión */}
         <div className="mb-16 rounded-2xl bg-gradient-to-br from-teal-800 to-teal-900 text-white p-8 md:p-10 shadow-md relative overflow-hidden">
           <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
           <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-2xl" />
-          <div className="grid md:grid-cols-2 gap-8 items-center relative">
+          <div className="grid md:grid-cols-2 gap-10 items-center relative">
             <div>
               <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-teal-200/80 mb-4">
                 La estrella del sistema
@@ -69,18 +70,24 @@ const Help: React.FC = () => {
               <h3 className="font-serif text-2xl md:text-3xl font-semibold mb-3">
                 Recepcionista IA 24/7
               </h3>
-              <p className="text-teal-100/90 leading-relaxed">
-                No es un chatbot genérico: vive dentro de tu software y conoce tu clínica,
-                tus precios, tus horarios y a tus pacientes.
+              <p className="text-teal-100/90 leading-relaxed mb-6">
+                No es un chatbot genérico: vive dentro de tu software y se conecta con
+                cada dato de tu clínica — precios, horarios, pacientes y tratamientos.
+              </p>
+              <ul className="divide-y divide-white/10">
+                {AI_BULLETS.map((b) => (
+                  <li key={b} className="py-2.5 text-sm text-teal-50/90 leading-relaxed first:pt-0 last:pb-0">
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <AiHubDiagram />
+              <p className="text-center text-sm text-teal-100/60 mt-8">
+                Un solo cerebro, conectado con todo tu consultorio.
               </p>
             </div>
-            <ul className="divide-y divide-white/10">
-              {AI_BULLETS.map((b) => (
-                <li key={b} className="py-3 text-teal-50/95 leading-relaxed first:pt-0 last:pb-0">
-                  {b}
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
 
@@ -114,18 +121,21 @@ const Help: React.FC = () => {
           </div>
         </div>
 
-        {/* Índice compacto del resto de módulos */}
-        <div className="border-t border-slate-200 pt-12 mb-14">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
+        {/* Grilla de módulos — cards */}
+        <div className="border-t border-slate-200 pt-14 mb-14">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {MODULES.map((m, i) => (
-              <div key={m.title}>
-                <span className="font-serif text-sm text-gold tabular-nums select-none">
+              <div
+                key={m.title}
+                className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-primary/25"
+              >
+                <span className="font-serif text-xl text-gold/80 tabular-nums select-none mb-3">
                   {String(i + 1).padStart(2, '0')}
                 </span>
-                <h3 className="font-serif text-lg font-semibold text-slate-900 mt-1.5 leading-snug">
+                <h3 className="font-serif text-base font-semibold text-slate-900 leading-snug group-hover:text-primary transition-colors">
                   {m.title}
                 </h3>
-                <p className="text-sm text-slate-500 mt-1 leading-relaxed">
+                <p className="text-[13px] text-slate-500 mt-1.5 leading-relaxed">
                   {m.description}
                 </p>
               </div>

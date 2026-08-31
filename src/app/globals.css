@@ -60,3 +60,17 @@
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Líneas del diagrama IA: el guion fluye hacia el núcleo (dato → IA). */
+.hub-line {
+  color: rgba(255, 255, 255, 0.22);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hub-line {
+    stroke-dasharray: 2.5 2.5;
+    animation: hub-dashflow 1.4s linear infinite;
+  }
+}
+@keyframes hub-dashflow {
+  to { stroke-dashoffset: -10; }
+}

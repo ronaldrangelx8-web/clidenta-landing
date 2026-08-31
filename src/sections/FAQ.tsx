@@ -13,7 +13,7 @@ const FAQ: React.FC = () => {
   const faqs = [
     {
       question: '¿Cómo funciona la demostración gratis?',
-      answer: 'Es una reunión corta donde analizamos tus canales de atención actuales (WhatsApp, Web, redes) y los flujos de preguntas frecuentes. Te mostraremos en vivo cómo estructuraríamos tu recepcionista IA. ¡Te sorprenderás de los resultados!',
+      answer: 'Es una reunión corta donde analizamos tus canales de atención (WhatsApp, redes, web) y cómo trabaja tu clínica. Te mostramos en vivo cómo entrenaríamos una IA que suene como tú y esté conectada con cada dato de tu clínica: agenda, precios, pacientes y tratamientos.',
     },
     {
       question: '¿Es solo un chatbot o incluye software de gestión?',
