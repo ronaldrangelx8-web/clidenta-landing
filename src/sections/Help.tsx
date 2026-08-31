@@ -129,7 +129,7 @@ const Help: React.FC = () => {
                 key={m.title}
                 className="group flex flex-col rounded-2xl border border-slate-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-primary/25"
               >
-                <span className="font-serif text-xl text-gold/80 tabular-nums select-none mb-3">
+                <span className="font-serif text-xl text-primary/70 tabular-nums select-none mb-3">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <h3 className="font-serif text-base font-semibold text-slate-900 leading-snug group-hover:text-primary transition-colors">

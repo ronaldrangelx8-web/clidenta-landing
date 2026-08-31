@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
           <span className="text-primary">hasta un 60%</span> con una{' '}
           <span className="relative whitespace-nowrap text-primary">
             Recepcionista IA
-            <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-gold/70" />
+            <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-primary/50" />
           </span>
         </h1>
 

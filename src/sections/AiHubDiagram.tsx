@@ -20,7 +20,7 @@ export default function AiHubDiagram() {
   return (
     <div className="relative w-full max-w-[360px] mx-auto aspect-square">
       {/* Glow de fondo */}
-      <div className="pointer-events-none absolute inset-[18%] rounded-full bg-gold/10 blur-3xl" />
+      <div className="pointer-events-none absolute inset-[18%] rounded-full bg-white/10 blur-3xl" />
 
       {/* Órbitas concéntricas (no radios) */}
       <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden="true">
@@ -48,13 +48,13 @@ export default function AiHubDiagram() {
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="relative h-24 w-24">
           {/* Glow del núcleo */}
-          <div className="absolute inset-[-10px] rounded-full bg-gold/25 blur-xl" />
-          {/* Halo dorado que gira */}
+          <div className="absolute inset-[-10px] rounded-full bg-white/20 blur-xl" />
+          {/* Halo de luz que gira */}
           <div
             className="absolute inset-0 rounded-full motion-safe:animate-[spin_7s_linear_infinite]"
             style={{
               background:
-                'conic-gradient(from 0deg, transparent 0deg, rgba(201,162,39,0.7) 55deg, transparent 130deg)',
+                'conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.75) 55deg, transparent 130deg)',
               WebkitMask:
                 'radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2.5px))',
               mask: 'radial-gradient(farthest-side, transparent calc(100% - 2.5px), #000 calc(100% - 2.5px))',

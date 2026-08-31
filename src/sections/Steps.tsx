@@ -30,7 +30,7 @@ const Steps: React.FC = () => {
         <div className="grid md:grid-cols-3 gap-10 md:gap-8 border-t border-slate-200">
           {STEPS.map((step) => (
             <div key={step.number} className="pt-8 md:pr-6">
-              <div className="font-serif text-5xl md:text-6xl font-semibold text-gold/80 leading-none mb-4 select-none">
+              <div className="font-serif text-5xl md:text-6xl font-semibold text-primary/70 leading-none mb-4 select-none">
                 {step.number}
               </div>
               <h3 className="text-xl font-serif font-semibold text-slate-900 mb-2">{step.title}</h3>

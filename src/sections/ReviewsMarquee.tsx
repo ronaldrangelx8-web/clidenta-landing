@@ -85,9 +85,9 @@ const ReviewsMarquee: React.FC = () => {
             >
               <div>
                 <div className="flex justify-between items-center mb-4">
-                  <div className="flex gap-1 text-gold">
+                  <div className="flex gap-1 text-primary">
                     {[...Array(review.rating)].map((_, i) => (
-                      <Star key={i} size={16} fill="currentColor" className="text-gold" />
+                      <Star key={i} size={16} fill="currentColor" className="text-primary" />
                     ))}
                   </div>
                   <Quote size={24} className="text-primary/10" />
