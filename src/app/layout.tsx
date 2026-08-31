@@ -118,40 +118,6 @@ export default function RootLayout({
         
         {children}
 
-        <style dangerouslySetInnerHTML={{ __html: `
-          .whatsapp-floating-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 65px;
-            height: 65px;
-            background-color: #25d366;
-            border-radius: 50%;
-            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease, background-color 0.3s ease;
-          }
-          .whatsapp-floating-btn:hover {
-            transform: scale(1.1);
-            background-color: #1ebe57;
-          }
-          .whatsapp-floating-btn img {
-            width: 50px;
-            height: 50px;
-          }
-        `}} />
-        <a 
-          href="https://wa.me/51920789569?text=Hola,%20me%20gustar%C3%ADa%20agendar%20una%20demostraci%C3%B3n%20del%20Recepcionista%20IA." 
-          className="whatsapp-floating-btn" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          aria-label="Contáctanos por WhatsApp"
-        >
-          <img src="/whatsapp-svgrepo-com.svg" alt="WhatsApp" />
-        </a>
       </body>
     </html>
   );

@@ -29,21 +29,10 @@ const Trust: React.FC = () => {
           ))}
         </div>
 
-        <div className="max-w-3xl mx-auto space-y-5">
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Nuestro equipo es experto en el diseño e integración de Inteligencia Artificial para
-            atención y ventas, logrando una automatización fluida con las herramientas que ya
-            utilizas en tu negocio.
-          </p>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Con más de 100 integraciones y desarrollos exitosos, ayudamos a clínicas y consultorios
-            a responder al instante a sus pacientes sin perder la calidez humana.
-          </p>
-          <p className="text-lg text-slate-600 leading-relaxed">
-            Todos nuestros desarrollos se entregan llave en mano, garantizando el control absoluto
-            de tus canales y datos, e incluyendo soporte continuo de optimización.
-          </p>
-        </div>
+        <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
+          Más de 100 integraciones entregadas llave en mano: tú mantienes el control de
+          tus canales y tus datos, con soporte continuo de nuestro equipo.
+        </p>
 
         <div className="flex justify-center mt-12">
           <button

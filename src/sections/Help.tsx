@@ -3,50 +3,18 @@ import React from 'react';
 import { Bot, CheckCircle2 } from 'lucide-react';
 
 /**
- * Vitrina de la plataforma: card hero para la Recepcionista IA + índice
- * editorial numerado de los módulos (tipografía, no cajitas — premium).
+ * Vitrina de la plataforma: menos texto, más producto. Card hero de la IA,
+ * dos módulos estrella con captura real y un índice compacto para el resto.
  */
 const MODULES = [
-  {
-    title: 'Agenda inteligente',
-    description: 'Calendario semanal por doctor. Las citas que agenda la IA aparecen al instante, sin sobrecupos.',
-  },
-  {
-    title: 'Odontograma premium',
-    description: 'Charting por caras, historial versionado, periodontograma y presupuesto desde el hallazgo.',
-  },
-  {
-    title: 'Historias y archivos',
-    description: 'Fotos, audios, consentimientos y documentos de cada paciente, organizados y seguros.',
-  },
-  {
-    title: 'Pacientes con DNI',
-    description: 'Escribe el DNI y los datos se autocompletan con RENIEC. Alta de pacientes en segundos.',
-  },
-  {
-    title: 'Recetas digitales',
-    description: 'Vademécum odontológico con alertas de interacciones y alergias. Lista para imprimir y firmar.',
-  },
-  {
-    title: 'Recordatorios automáticos',
-    description: 'Confirmaciones por WhatsApp que reducen inasistencias: citas, controles, cumpleaños y reactivación.',
-  },
-  {
-    title: 'Flujos sin código',
-    description: 'Diseña menús y respuestas automáticas con un editor visual. Tu WhatsApp trabaja con tus reglas.',
-  },
-  {
-    title: 'Finanzas y productividad',
-    description: 'Presupuestos, pagos, comisiones por doctor y analítica clínica para decidir con números.',
-  },
-  {
-    title: 'Inventario y laboratorio',
-    description: 'Stock con alertas y trabajos de laboratorio con seguimiento. Nada se pierde en el camino.',
-  },
-  {
-    title: 'CRM de conversaciones',
-    description: 'WhatsApp e Instagram en una sola bandeja. Ve lo que respondió la IA y retoma cuando quieras.',
-  },
+  { title: 'Historias y archivos', description: 'Fotos, audios y documentos de cada paciente.' },
+  { title: 'Pacientes con DNI', description: 'Datos autocompletados con RENIEC en segundos.' },
+  { title: 'Recetas digitales', description: 'Vademécum con alertas de interacciones.' },
+  { title: 'Recordatorios automáticos', description: 'Confirmaciones por WhatsApp, menos inasistencias.' },
+  { title: 'Flujos sin código', description: 'Menús y respuestas automáticas con editor visual.' },
+  { title: 'Finanzas y productividad', description: 'Presupuestos, pagos y comisiones por doctor.' },
+  { title: 'Inventario y laboratorio', description: 'Stock con alertas y trabajos con seguimiento.' },
+  { title: 'CRM de conversaciones', description: 'WhatsApp e Instagram en una sola bandeja.' },
 ];
 
 const AI_BULLETS = [
@@ -55,6 +23,20 @@ const AI_BULLETS = [
   'Agenda, reagenda y confirma citas directo en tu calendario',
   'Deriva a tu equipo humano cuando la conversación lo necesita',
 ];
+
+/** Captura de producto con marco de navegador. */
+function Shot({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-xl shadow-primary/5 bg-white">
+      <div className="flex items-center gap-2 px-4 py-2 bg-slate-100 border-b border-slate-200/80">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
+      </div>
+      <img src={src} alt={alt} className="w-full block" loading="lazy" />
+    </div>
+  );
+}
 
 const Help: React.FC = () => {
   const scrollToCalendar = () => {
@@ -67,16 +49,12 @@ const Help: React.FC = () => {
       <div className="max-w-5xl mx-auto">
 
         <div className="text-center mb-14">
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-            La plataforma completa
-          </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-slate-900 leading-tight">
             Mucho más que una recepcionista:{' '}
             <span className="text-primary">todo tu consultorio en un solo lugar</span>
           </h2>
-          <p className="text-slate-600 max-w-2xl mx-auto mt-5 text-lg">
-            La IA atiende y agenda; el software gestiona tu clínica de punta a punta.
-            Todo conectado, todo incluido.
+          <p className="text-slate-600 max-w-xl mx-auto mt-5 text-lg">
+            La IA atiende y agenda; el software gestiona el resto.
           </p>
         </div>
 
@@ -113,21 +91,51 @@ const Help: React.FC = () => {
           </div>
         </div>
 
-        {/* Índice editorial de módulos */}
-        <div className="grid md:grid-cols-2 gap-x-16 border-t border-slate-200">
+        {/* Módulo estrella 1: odontograma (imagen derecha) */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+          <div>
+            <h3 className="font-serif text-2xl md:text-3xl font-semibold text-slate-900 mb-3">
+              Un odontograma que <span className="text-primary">da gusto usar</span>
+            </h3>
+            <p className="text-slate-600 leading-relaxed">
+              Marca condiciones por caras, guarda versiones con historial y presupuesta
+              desde el hallazgo con un click. Incluye periodontograma.
+            </p>
+          </div>
+          <Shot src="/screens/odontograma.png" alt="Odontograma digital de Clidenta con condiciones marcadas" />
+        </div>
+
+        {/* Módulo estrella 2: recepcionista (imagen izquierda) */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center mb-16">
+          <div className="md:order-2">
+            <h3 className="font-serif text-2xl md:text-3xl font-semibold text-slate-900 mb-3">
+              Mira cuánto <span className="text-primary">trabaja tu IA</span>
+            </h3>
+            <p className="text-slate-600 leading-relaxed">
+              Citas agendadas, conversaciones atendidas y mensajes respondidos, en vivo.
+              Tu recepcionista también rinde cuentas.
+            </p>
+          </div>
+          <div className="md:order-1">
+            <Shot src="/screens/recepcionista.png" alt="Panel de la Recepcionista IA con métricas de citas y conversaciones" />
+          </div>
+        </div>
+
+        {/* Índice compacto del resto de módulos */}
+        <div className="grid md:grid-cols-2 gap-x-16 border-t border-slate-200 mb-14">
           {MODULES.map((m, i) => (
             <div
               key={m.title}
-              className="group grid grid-cols-[2.75rem_1fr] gap-x-2 py-7 border-b border-slate-200"
+              className="group grid grid-cols-[2.5rem_1fr] gap-x-2 py-5 border-b border-slate-200"
             >
-              <span className="font-serif text-[15px] text-gold tabular-nums pt-[3px] select-none">
+              <span className="font-serif text-[14px] text-gold tabular-nums pt-[2px] select-none">
                 {String(i + 1).padStart(2, '0')}
               </span>
               <div>
-                <h3 className="font-serif text-xl md:text-[1.35rem] font-semibold text-slate-900 group-hover:text-primary transition-colors duration-200">
+                <h3 className="font-serif text-lg font-semibold text-slate-900 group-hover:text-primary transition-colors duration-200">
                   {m.title}
                 </h3>
-                <p className="text-[15px] text-slate-500 mt-1.5 leading-relaxed max-w-md">
+                <p className="text-sm text-slate-500 mt-0.5 leading-relaxed">
                   {m.description}
                 </p>
               </div>
@@ -135,12 +143,12 @@ const Help: React.FC = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-14">
+        <div className="flex justify-center">
           <button
             onClick={scrollToCalendar}
             className="bg-primary text-primary-foreground font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
           >
-            Quiero verlo funcionando en mi clínica
+            Quiero verlo en mi clínica
           </button>
         </div>
 
