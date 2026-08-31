@@ -10,11 +10,9 @@ interface Message {
 
 const PainPoints: React.FC = () => {
   const painPoints = [
-    'Tus pacientes escriben a las 11 PM. Nadie responde. Agendan con tu competencia.',
-    'Tu secretaria confirma citas todo el día. Los pacientes en sala esperan sin atención.',
-    'Urgencia dental a las 3 AM. Tu respuesta llega 8 horas después. Esos $500 se fueron.',
-    'Te escriben por WhatsApp. Respondes horas tarde. Ese prospecto ya agendó con otro.',
-    'Cero seguimiento a tus clientes. Sin un sistema de gestión, los pacientes se pierden y no vuelven.',
+    { lead: 'Tus pacientes escriben a las 11 PM.', rest: 'Nadie responde. Agendan con tu competencia.' },
+    { lead: 'Urgencia dental a las 3 AM.', rest: 'Tu respuesta llega 8 horas después. Esa cita se fue.' },
+    { lead: 'Cero seguimiento.', rest: 'Sin un sistema, los pacientes se pierden y no vuelven.' },
   ];
 
   const scrollToCalendar = () => {
@@ -95,17 +93,17 @@ const PainPoints: React.FC = () => {
     <section id="pain-points" className="bg-gradient-to-b from-teal-800 to-teal-900 py-20 px-4 text-white">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-semibold text-center mb-16">
-          Esto te está pasando <span className="text-gold">ahora mismo</span>
+          Esto te está pasando <span className="italic">ahora mismo</span>
         </h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Pain points list */}
-          <div className="space-y-6">
+          {/* Pain points — declaraciones editoriales */}
+          <div className="divide-y divide-white/10 self-center">
             {painPoints.map((point, index) => (
-              <div key={index} className="flex items-start gap-4">
-                <span className="text-amber-300 bg-white/10 rounded-full w-8 h-8 flex items-center justify-center text-sm font-semibold flex-shrink-0 mt-0.5">✕</span>
-                <p className="text-white/90 text-lg leading-relaxed">{point}</p>
-              </div>
+              <p key={index} className="py-7 first:pt-0 last:pb-0 font-serif text-xl md:text-2xl leading-snug">
+                <span className="text-white font-semibold">{point.lead}</span>{' '}
+                <span className="text-teal-100/70">{point.rest}</span>
+              </p>
             ))}
           </div>
 
@@ -204,15 +202,6 @@ const PainPoints: React.FC = () => {
           </div>
         </div>
 
-        {/* CTA Button */}
-        <div className="flex justify-center mt-16">
-          <button
-            onClick={scrollToCalendar}
-            className="bg-gold text-white font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-gold/90 hover:shadow transition-all duration-300 text-lg"
-          >
-            Quiero más información
-          </button>
-        </div>
       </div>
     </section>
   );

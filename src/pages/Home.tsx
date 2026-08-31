@@ -7,7 +7,6 @@ const ReviewsMarquee = React.lazy(() => import('@/sections/ReviewsMarquee'));
 const PainPoints = React.lazy(() => import('@/sections/PainPoints'));
 const Help = React.lazy(() => import('@/sections/Help'));
 const Steps = React.lazy(() => import('@/sections/Steps'));
-const Portfolio = React.lazy(() => import('@/sections/Portfolio'));
 const Trust = React.lazy(() => import('@/sections/Trust'));
 const FAQ = React.lazy(() => import('@/sections/FAQ'));
 const Footer = React.lazy(() => import('@/sections/Footer'));
@@ -25,7 +24,6 @@ const Home: React.FC = () => {
         <PainPoints />
         <Help />
         <Steps />
-        <Portfolio />
         <Trust />
         <FAQ />
         <Footer />

@@ -77,9 +77,9 @@ const FAQ: React.FC = () => {
         <div className="flex justify-center">
           <button
             onClick={scrollToCalendar}
-            className="bg-gold text-white font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-gold/90 hover:shadow transition-all duration-300 text-lg"
+            className="bg-white text-teal-900 font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-teal-50 hover:shadow transition-all duration-300 text-lg"
           >
-            Agendar mi demostración
+            Agendar demostración gratis
           </button>
         </div>
       </div>

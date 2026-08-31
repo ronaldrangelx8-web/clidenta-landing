@@ -34,14 +34,6 @@ const Trust: React.FC = () => {
           tus canales y tus datos, con soporte continuo de nuestro equipo.
         </p>
 
-        <div className="flex justify-center mt-12">
-          <button
-            onClick={scrollToCalendar}
-            className="bg-primary text-primary-foreground font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
-          >
-            Quiero más información
-          </button>
-        </div>
       </div>
     </section>
   );

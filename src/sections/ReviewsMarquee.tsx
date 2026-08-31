@@ -8,7 +8,7 @@ const reviews = [
     name: 'Dra. Dennisse Arroyo',
     title: 'Clínica Odontológica Arroyo',
     rating: 5,
-    quote: 'Nuestra clínica está sumamente satisfecha con Clidenta. La forma en que la inteligencia artificial responde consultas complejas de ortodoncia es impecable. Redujimos las inasistencias en un 95% gracias a sus recordatorios automáticos.',
+    quote: 'La IA responde consultas complejas de ortodoncia de forma impecable. Redujimos las inasistencias en un 95%.',
     experience: 'Más de 40 años de experiencia',
     avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
   },
@@ -17,7 +17,7 @@ const reviews = [
     name: 'Dr. Miguel Dávila',
     title: 'Cirujano Dentista & Rehabilitación Estética',
     rating: 5,
-    quote: 'Gracias a Clidenta logré manejar un volumen muy alto de mensajes en Instagram y WhatsApp. La IA responde al instante con tono profesional y agenda citas 24/7 sin superponer horarios. Transformó por completo nuestra captación digital.',
+    quote: 'La IA responde al instante en Instagram y WhatsApp, y agenda 24/7 sin superponer horarios. Transformó nuestra captación.',
     experience: 'Odontología y Cirugía Estética en Lima',
     avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
   },
@@ -26,7 +26,7 @@ const reviews = [
     name: 'Dr. Julio Zumaeta',
     title: 'Multident Especialista en Estética Dental',
     rating: 5,
-    quote: 'Teníamos dudas sobre si los pacientes notarían que hablan con una IA, pero la conversación es tan natural y humana que muchos agendan felicitando a nuestra "recepcionista". La reducción del tiempo administrativo ha sido del 40%.',
+    quote: 'La conversación es tan natural que los pacientes felicitan a nuestra «recepcionista». 40% menos tiempo administrativo.',
     experience: 'Especialista en Diseño de Sonrisas',
     avatar: 'https://randomuser.me/api/portraits/men/67.jpg'
   },
@@ -35,7 +35,7 @@ const reviews = [
     name: 'Dra. Carla Mendoza',
     title: 'Centro Dental Sonríe Lima',
     rating: 5,
-    quote: 'Antes perdíamos hasta 8 pacientes por semana por no responder a tiempo. Con Clidenta, la IA atiende cada mensaje en segundos, incluso a las 2 AM. Nuestro índice de conversión de consultas a citas subió un 60% en el primer mes.',
+    quote: 'Perdíamos 8 pacientes por semana por no responder a tiempo. Ahora la IA atiende en segundos, incluso a las 2 AM.',
     experience: 'Especialista en Endodoncia',
     avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
   },
@@ -44,7 +44,7 @@ const reviews = [
     name: 'Dr. Fernando Castillo',
     title: 'Implantes Dentales Perú',
     rating: 5,
-    quote: 'Lo que más me impresionó fue la capacidad de Clidenta para explicar procedimientos complejos como implantes y cirugías. Los pacientes llegan mejor informados y más decididos. Ha elevado la calidad de nuestra atención digital al 100%.',
+    quote: 'Explica procedimientos complejos como implantes con claridad. Los pacientes llegan mejor informados y más decididos.',
     experience: 'Cirujano Maxilofacial con 15 años',
     avatar: 'https://randomuser.me/api/portraits/men/52.jpg'
   },
@@ -53,7 +53,7 @@ const reviews = [
     name: 'Dra. Valentina Ríos',
     title: 'OrthoSmile Clínica Ortodóntica',
     rating: 5,
-    quote: 'Implementamos Clidenta hace 3 meses y ya no podemos imaginar volver atrás. La IA maneja más de 200 conversaciones semanales sin errores, agenda correctamente y hasta envía seguimientos post-tratamiento. Es como tener 3 recepcionistas extra.',
+    quote: 'Maneja más de 200 conversaciones semanales sin errores y envía seguimientos. Es como tener 3 recepcionistas extra.',
     experience: 'Ortodoncista certificada en Invisalign',
     avatar: 'https://randomuser.me/api/portraits/women/33.jpg'
   }

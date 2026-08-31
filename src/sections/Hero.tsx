@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import Logo from '@/components/Logo';
-import { Sparkles, ArrowDown } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 
 /** ISO country code → "Perú 🇵🇪" (nombre en español + bandera regional). */
 function countryLabel(code: string): string {
@@ -45,13 +45,10 @@ const Hero: React.FC = () => {
           <Logo />
         </div>
 
-        {/* Badge */}
-        <div className="flex justify-center mb-6">
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/15 bg-white px-4 py-1.5 text-xs sm:text-sm font-medium text-primary shadow-sm">
-            <Sparkles size={14} className="text-gold" />
-            Sistema de gestión dental + Recepcionista IA · {geo}
-          </span>
-        </div>
+        {/* Eyebrow */}
+        <p className="text-center text-[12px] sm:text-[13px] font-medium tracking-[0.14em] uppercase text-slate-500 mb-6">
+          Sistema de gestión dental + Recepcionista IA · <span className="text-primary">{geo}</span>
+        </p>
 
         {/* Hero Title — corto, 2 líneas máx en desktop */}
         <h1 className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] font-serif font-semibold text-slate-900 leading-[1.12] max-w-3xl mx-auto mb-5">

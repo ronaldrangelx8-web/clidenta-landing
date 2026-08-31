@@ -1,6 +1,5 @@
 "use client";
 import React from 'react';
-import { Bot, CheckCircle2 } from 'lucide-react';
 
 /**
  * Vitrina de la plataforma: menos texto, más producto. Card hero de la IA,
@@ -60,18 +59,13 @@ const Help: React.FC = () => {
 
         {/* Card hero: Recepcionista IA */}
         <div className="mb-16 rounded-2xl bg-gradient-to-br from-teal-800 to-teal-900 text-white p-8 md:p-10 shadow-md relative overflow-hidden">
-          <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent" />
+          <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-transparent via-white/30 to-transparent" />
           <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-white/5 blur-2xl" />
           <div className="grid md:grid-cols-2 gap-8 items-center relative">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="h-11 w-11 rounded-xl bg-white/10 flex items-center justify-center">
-                  <Bot size={24} />
-                </div>
-                <span className="rounded-full bg-gold text-white text-[11px] font-semibold tracking-wide uppercase px-3 py-1">
-                  La estrella
-                </span>
-              </div>
+              <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-teal-200/80 mb-4">
+                La estrella del sistema
+              </p>
               <h3 className="font-serif text-2xl md:text-3xl font-semibold mb-3">
                 Recepcionista IA 24/7
               </h3>
@@ -80,11 +74,10 @@ const Help: React.FC = () => {
                 tus precios, tus horarios y a tus pacientes.
               </p>
             </div>
-            <ul className="space-y-3">
+            <ul className="divide-y divide-white/10">
               {AI_BULLETS.map((b) => (
-                <li key={b} className="flex items-start gap-3">
-                  <CheckCircle2 size={18} className="text-gold mt-0.5 shrink-0" />
-                  <span className="text-teal-50/95">{b}</span>
+                <li key={b} className="py-3 text-teal-50/95 leading-relaxed first:pt-0 last:pb-0">
+                  {b}
                 </li>
               ))}
             </ul>
@@ -122,25 +115,22 @@ const Help: React.FC = () => {
         </div>
 
         {/* Índice compacto del resto de módulos */}
-        <div className="grid md:grid-cols-2 gap-x-16 border-t border-slate-200 mb-14">
-          {MODULES.map((m, i) => (
-            <div
-              key={m.title}
-              className="group grid grid-cols-[2.5rem_1fr] gap-x-2 py-5 border-b border-slate-200"
-            >
-              <span className="font-serif text-[14px] text-gold tabular-nums pt-[2px] select-none">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <div>
-                <h3 className="font-serif text-lg font-semibold text-slate-900 group-hover:text-primary transition-colors duration-200">
+        <div className="border-t border-slate-200 pt-12 mb-14">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-10">
+            {MODULES.map((m, i) => (
+              <div key={m.title}>
+                <span className="font-serif text-sm text-gold tabular-nums select-none">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h3 className="font-serif text-lg font-semibold text-slate-900 mt-1.5 leading-snug">
                   {m.title}
                 </h3>
-                <p className="text-sm text-slate-500 mt-0.5 leading-relaxed">
+                <p className="text-sm text-slate-500 mt-1 leading-relaxed">
                   {m.description}
                 </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         <div className="flex justify-center">
@@ -148,7 +138,7 @@ const Help: React.FC = () => {
             onClick={scrollToCalendar}
             className="bg-primary text-primary-foreground font-semibold px-8 py-3.5 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
           >
-            Quiero verlo en mi clínica
+            Agendar demostración gratis
           </button>
         </div>
 
