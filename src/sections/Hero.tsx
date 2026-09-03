@@ -57,7 +57,7 @@ const Hero: React.FC<{ copy?: AdCopy }> = ({ copy = DEFAULT_COPY }) => {
         </div>
 
         {/* Hero Title */}
-        <h1 className="text-center text-3xl sm:text-4xl md:text-5xl font-serif font-semibold text-slate-900 leading-[1.15] max-w-4xl mx-auto mb-5">
+        <h1 className="text-center text-3xl sm:text-4xl md:text-5xl font-sans font-bold tracking-tight text-slate-900 leading-[1.15] max-w-4xl mx-auto mb-5">
           {renderCopy(copy.title)}
         </h1>
 
