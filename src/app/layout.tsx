@@ -14,6 +14,20 @@ export const metadata: Metadata = {
     'el mejor recepcionista AI para clínicas, inteligencia artificial para consultorios, chatbot médico para WhatsApp, agenda de citas médica automatizada, asistente virtual médico, software de recepción dental, Clidenta Perú LATAM',
   authors: [{ name: 'Clidenta' }],
   robots: 'index, follow',
+  icons: {
+    icon: [
+      {
+        url: '/logo/clidenta-icon.svg',
+        type: 'image/svg+xml',
+        media: '(prefers-color-scheme: light)',
+      },
+      {
+        url: '/logo/clidenta-icon-light.svg',
+        type: 'image/svg+xml',
+        media: '(prefers-color-scheme: dark)',
+      },
+    ],
+  },
   alternates: {
     canonical: 'https://clidenta.com/',
   },

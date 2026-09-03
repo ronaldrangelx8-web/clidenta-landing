@@ -9,10 +9,10 @@ const Logo: React.FC<LogoProps> = ({ className = '' }) => {
   return (
     <div className={`flex items-center justify-center ${className}`}>
       <Image
-        src="/logo/logo_black.png"
-        alt="Logo"
+        src="/logo/clidenta-logo.svg"
+        alt="Clidenta"
         className="h-10 w-auto object-contain"
-        width={160}
+        width={208}
         height={40}
         priority
       />
