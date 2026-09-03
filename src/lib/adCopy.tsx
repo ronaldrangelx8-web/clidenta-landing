@@ -12,7 +12,7 @@ import React from 'react';
  *
  * Marcado ligero dentro de los textos:
  *   *texto*  → resaltado en color primary
- *   _texto_  → resaltado primary + subrayado decorativo (solo en el título)
+ *   _texto_  → resaltado primary sin salto de línea (para el término clave)
  *
  * URL a pegar en el anuncio de Meta (campo "Parámetros de URL"):
  *   ad=<slug>&utm_source=facebook&utm_medium=paid&utm_content={{ad.name}}
@@ -85,9 +85,8 @@ export function renderCopy(
     }
     if (part.startsWith('_') && part.endsWith('_')) {
       return (
-        <span key={i} className="relative whitespace-nowrap text-primary">
+        <span key={i} className="whitespace-nowrap text-primary">
           {part.slice(1, -1)}
-          <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-primary/50" />
         </span>
       );
     }
