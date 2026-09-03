@@ -1,10 +1,15 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import Logo from '@/components/Logo';
-import { ArrowDown } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import HeroLivePreview from './HeroLivePreview';
 import { AdCopy, DEFAULT_COPY, renderCopy } from '@/lib/adCopy';
 import posthog from '@/instrumentation-client';
+
+const WHATSAPP_NUMBER = '51920789569';
+const WHATSAPP_MESSAGE =
+  'Hola, vi Clidenta y quiero recibir más información y coordinar una demostración.';
+const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 /** ISO country code → "Perú 🇵🇪" (nombre en español + bandera regional). */
 function countryLabel(code: string): string {
@@ -34,11 +39,6 @@ const Hero: React.FC<{ copy?: AdCopy }> = ({ copy = DEFAULT_COPY }) => {
       .catch(() => {});
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section className="bg-background pt-8 pb-10 px-4 relative overflow-hidden">
       {/* Halo suave de marca */}
@@ -67,33 +67,28 @@ const Hero: React.FC<{ copy?: AdCopy }> = ({ copy = DEFAULT_COPY }) => {
           {renderCopy(copy.subtitle, 'text-primary font-semibold')}
         </p>
 
+        {/* CTA directo a WhatsApp */}
+        <div className="flex justify-center mb-10">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() =>
+              posthog.capture('hero_cta_clicked', {
+                cta: copy.cta,
+                channel: 'whatsapp',
+              })
+            }
+            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all duration-300 text-lg"
+          >
+            <MessageCircle aria-hidden="true" size={22} />
+            Agendar por WhatsApp
+          </a>
+        </div>
+
         {/* Producto real, "en vivo": la agenda de Clidenta */}
-        <div className="max-w-4xl mx-auto mb-10">
+        <div className="max-w-4xl mx-auto">
           <HeroLivePreview />
-        </div>
-
-        {/* CTA */}
-        <div className="flex justify-center">
-          <button
-            onClick={() => {
-              posthog.capture('hero_cta_clicked', { cta: copy.cta });
-              scrollTo('agenda');
-            }}
-            className="w-full sm:w-auto bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
-          >
-            {copy.cta}
-          </button>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="flex justify-center mt-8">
-          <button
-            onClick={() => scrollTo('agenda')}
-            aria-label="Ir a la sección de agendamiento"
-            className="animate-bounce text-primary/50 hover:text-primary transition-colors"
-          >
-            <ArrowDown size={22} />
-          </button>
         </div>
       </div>
     </section>

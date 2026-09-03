@@ -2,7 +2,6 @@ import React, { Suspense } from 'react';
 import Hero from '@/sections/Hero';
 
 // Lazy loading de componentes pesados que no están en el primer pantallazo (Below the fold)
-const Agenda = React.lazy(() => import('@/sections/Agenda'));
 const ReviewsMarquee = React.lazy(() => import('@/sections/ReviewsMarquee'));
 const PainPoints = React.lazy(() => import('@/sections/PainPoints'));
 const Help = React.lazy(() => import('@/sections/Help'));
@@ -19,7 +18,6 @@ const Home: React.FC = () => {
       
       {/* El resto de la página se carga de forma diferida para liberar el Hilo Principal y mejorar el INP */}
       <Suspense fallback={<div className="h-32 flex items-center justify-center opacity-50">Cargando...</div>}>
-        <Agenda />
         <ReviewsMarquee />
         <PainPoints />
         <Help />
