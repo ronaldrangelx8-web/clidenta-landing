@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Logo from '@/components/Logo';
 import { ArrowDown } from 'lucide-react';
 import HeroLivePreview from './HeroLivePreview';
+import { AdCopy, DEFAULT_COPY, renderCopy } from '@/lib/adCopy';
 
 /** ISO country code → "Perú 🇵🇪" (nombre en español + bandera regional). */
 function countryLabel(code: string): string {
@@ -19,7 +20,7 @@ function countryLabel(code: string): string {
   }
 }
 
-const Hero: React.FC = () => {
+const Hero: React.FC<{ copy?: AdCopy }> = ({ copy = DEFAULT_COPY }) => {
   // Geolocalización por IP para personalizar el badge (fallback: Perú).
   const [geo, setGeo] = useState('del Perú 🇵🇪');
 
@@ -51,24 +52,18 @@ const Hero: React.FC = () => {
         {/* Eyebrow — ficha roja de alerta */}
         <div className="flex justify-center mb-6">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-red-600 text-white text-[11px] sm:text-xs font-semibold tracking-[0.12em] uppercase px-4 py-1.5 shadow-sm motion-safe:animate-[vibrate_3s_ease-in-out_infinite]">
-            Atención odontólogos {geo}
+            {copy.eyebrow} {geo}
           </span>
         </div>
 
         {/* Hero Title */}
         <h1 className="text-center text-3xl sm:text-4xl md:text-5xl font-serif font-semibold text-slate-900 leading-[1.15] max-w-4xl mx-auto mb-5">
-          Aumenta la facturación de tu Clínica Dental{' '}
-          <span className="text-primary">hasta un 60%</span> con una{' '}
-          <span className="relative whitespace-nowrap text-primary">
-            Recepcionista IA
-            <span className="absolute -bottom-1 left-0 h-[3px] w-full rounded-full bg-primary/50" />
-          </span>
+          {renderCopy(copy.title)}
         </h1>
 
         {/* Subtitle — corto y amigable */}
         <p className="font-sans text-center text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-8 leading-relaxed">
-          Atiende tu WhatsApp 24/7, agenda citas sola y llega con tu clínica completa.
-          Lista en <span className="text-primary font-semibold">7 días</span>.
+          {renderCopy(copy.subtitle, 'text-primary font-semibold')}
         </p>
 
         {/* Producto real, "en vivo": la agenda de Clidenta */}
@@ -82,7 +77,7 @@ const Hero: React.FC = () => {
             onClick={() => scrollTo('agenda')}
             className="w-full sm:w-auto bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
           >
-            Agendar demostración gratis
+            {copy.cta}
           </button>
         </div>
 
