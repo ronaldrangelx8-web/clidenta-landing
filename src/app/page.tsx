@@ -1,25 +1,10 @@
-import Hero from '@/sections/Hero';
-import dynamic from 'next/dynamic';
-import { resolveAdCopy } from '@/lib/adCopy';
+import LandingPage from '@/components/LandingPage';
+import { DEFAULT_COPY } from '@/lib/adCopy';
 
-const Agenda = dynamic(() => import('@/sections/Agenda'), { ssr: true });
-const ReviewsMarquee = dynamic(() => import('@/sections/ReviewsMarquee'), { ssr: true });
-const Footer = dynamic(() => import('@/sections/Footer'), { ssr: true });
-
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}) {
-  // Copy del Hero según el anuncio de origen (?ad=<slug>), SSR sin parpadeo.
-  const copy = await resolveAdCopy(await searchParams);
-
-  return (
-    <main className="min-h-screen">
-      <Hero copy={copy} />
-      <Agenda />
-      <ReviewsMarquee />
-      <Footer />
-    </main>
-  );
+// La home es 100% estática: se pre-renderiza en build y se sirve al instante
+// aunque el backend o el propio servidor estén lentos. Los visitantes que
+// llegan de un anuncio (?ad=/?v=/?utm_content=) son reescritos por el
+// middleware a /a/[slug], que resuelve su copy con ISR.
+export default function Home() {
+  return <LandingPage copy={DEFAULT_COPY} />;
 }

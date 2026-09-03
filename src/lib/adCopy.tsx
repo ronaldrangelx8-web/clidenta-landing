@@ -40,20 +40,12 @@ const COPY_API_URL =
   process.env.LANDING_COPY_API_URL || 'https://api.clidenta.net';
 
 /**
- * Resuelve el copy a partir de los searchParams de la página, consultando
- * el backend (server-side, cache 60s). Cualquier fallo → copy por defecto:
- * la landing nunca se cae por culpa del API.
+ * Trae el copy de un anuncio por slug, consultando el backend (server-side,
+ * cache 60s). Cualquier fallo → copy por defecto: la landing nunca se cae por
+ * culpa del API. La extracción del slug desde la URL vive en el middleware,
+ * que reescribe /?ad=<slug> a /a/<slug>.
  */
-export async function resolveAdCopy(
-  params: Record<string, string | string[] | undefined>,
-): Promise<AdCopy> {
-  const pick = (v: string | string[] | undefined) =>
-    Array.isArray(v) ? v[0] : v;
-  const slug = (pick(params.ad) || pick(params.v) || pick(params.utm_content) || '')
-    .toLowerCase()
-    .trim();
-  if (!slug || !/^[a-z0-9-]{1,60}$/.test(slug)) return DEFAULT_COPY;
-
+export async function fetchAdCopy(slug: string): Promise<AdCopy> {
   try {
     const res = await fetch(
       `${COPY_API_URL}/public/landing/copy?ad=${encodeURIComponent(slug)}`,
