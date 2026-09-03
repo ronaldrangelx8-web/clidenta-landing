@@ -4,6 +4,7 @@ import Logo from '@/components/Logo';
 import { ArrowDown } from 'lucide-react';
 import HeroLivePreview from './HeroLivePreview';
 import { AdCopy, DEFAULT_COPY, renderCopy } from '@/lib/adCopy';
+import posthog from '@/instrumentation-client';
 
 /** ISO country code → "Perú 🇵🇪" (nombre en español + bandera regional). */
 function countryLabel(code: string): string {
@@ -74,7 +75,10 @@ const Hero: React.FC<{ copy?: AdCopy }> = ({ copy = DEFAULT_COPY }) => {
         {/* CTA */}
         <div className="flex justify-center">
           <button
-            onClick={() => scrollTo('agenda')}
+            onClick={() => {
+              posthog.capture('hero_cta_clicked', { cta: copy.cta });
+              scrollTo('agenda');
+            }}
             className="w-full sm:w-auto bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow transition-all duration-300 text-lg"
           >
             {copy.cta}

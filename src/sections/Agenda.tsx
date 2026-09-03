@@ -1,12 +1,18 @@
 "use client";
 import React, { useEffect } from 'react';
 import Cal, { getCalApi } from "@calcom/embed-react";
+import posthog from '@/instrumentation-client';
 
 const Agenda: React.FC = () => {
   useEffect(() => {
     (async function () {
       const cal = await getCalApi({ namespace: "30min" });
       cal("ui", { theme: "light", hideEventTypeDetails: false, layout: "month_view" });
+      // Conversión principal del landing: demo agendada en Cal.com.
+      cal("on", {
+        action: "bookingSuccessful",
+        callback: () => posthog.capture('demo_booked'),
+      });
     })();
   }, []);
 
