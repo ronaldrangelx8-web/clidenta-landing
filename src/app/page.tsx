@@ -12,7 +12,7 @@ export default async function Home({
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   // Copy del Hero según el anuncio de origen (?ad=<slug>), SSR sin parpadeo.
-  const copy = resolveAdCopy(await searchParams);
+  const copy = await resolveAdCopy(await searchParams);
 
   return (
     <main className="min-h-screen">

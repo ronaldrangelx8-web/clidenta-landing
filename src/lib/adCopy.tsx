@@ -7,8 +7,10 @@ import React from 'react';
  * renderiza el copy del Hero que corresponde a ese anuncio, para que el
  * visitante aterrice en el mismo mensaje que acaba de ver en Meta.
  *
- * Marcado ligero dentro de los textos (pensado para editarse luego desde
- * el panel admin sin tocar código):
+ * Los variants se crean y editan desde el panel admin (página Anuncios);
+ * el backend los sirve en GET /public/landing/copy?ad=<slug>.
+ *
+ * Marcado ligero dentro de los textos:
  *   *texto*  → resaltado en color primary
  *   _texto_  → resaltado primary + subrayado decorativo (solo en el título)
  *
@@ -33,39 +35,36 @@ export const DEFAULT_COPY: AdCopy = {
   cta: 'Agendar demostración gratis',
 };
 
-/**
- * Variantes por anuncio. La clave es el slug que va en `?ad=` en la URL
- * del anuncio. EJEMPLOS — edita/añade según tus anuncios reales.
- */
-export const AD_VARIANTS: Record<string, AdCopy> = {
-  'whatsapp-247': {
-    eyebrow: 'Atención odontólogos',
-    title:
-      'Tu clínica responde el WhatsApp *a las 11 de la noche* con una _Recepcionista IA_',
-    subtitle:
-      'Cada mensaje sin responder es un paciente que se va a otra clínica. La IA contesta y agenda sola, 24/7.',
-    cta: 'Ver cómo funciona gratis',
-  },
-  'citas-perdidas': {
-    eyebrow: 'Atención odontólogos',
-    title:
-      'Deja de perder pacientes por *citas sin confirmar* — tu _Recepcionista IA_ los recupera',
-    subtitle:
-      'Confirma, reprograma y hace seguimiento por WhatsApp sin que tu equipo levante un dedo.',
-    cta: 'Agendar demostración gratis',
-  },
-};
+/** Backend que sirve los copys creados desde el panel admin. */
+const COPY_API_URL =
+  process.env.LANDING_COPY_API_URL || 'https://api.clidenta.net';
 
-/** Resuelve el copy a partir de los searchParams de la página. */
-export function resolveAdCopy(
+/**
+ * Resuelve el copy a partir de los searchParams de la página, consultando
+ * el backend (server-side, cache 60s). Cualquier fallo → copy por defecto:
+ * la landing nunca se cae por culpa del API.
+ */
+export async function resolveAdCopy(
   params: Record<string, string | string[] | undefined>,
-): AdCopy {
+): Promise<AdCopy> {
   const pick = (v: string | string[] | undefined) =>
     Array.isArray(v) ? v[0] : v;
   const slug = (pick(params.ad) || pick(params.v) || pick(params.utm_content) || '')
     .toLowerCase()
     .trim();
-  return (slug && AD_VARIANTS[slug]) || DEFAULT_COPY;
+  if (!slug || !/^[a-z0-9-]{1,60}$/.test(slug)) return DEFAULT_COPY;
+
+  try {
+    const res = await fetch(
+      `${COPY_API_URL}/public/landing/copy?ad=${encodeURIComponent(slug)}`,
+      { next: { revalidate: 60 }, signal: AbortSignal.timeout(1500) },
+    );
+    if (!res.ok) return DEFAULT_COPY;
+    const data = (await res.json()) as { copy: AdCopy | null };
+    return data.copy ?? DEFAULT_COPY;
+  } catch {
+    return DEFAULT_COPY;
+  }
 }
 
 /**
