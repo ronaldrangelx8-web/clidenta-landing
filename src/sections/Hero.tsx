@@ -1,5 +1,6 @@
 import Logo from '@/components/Logo';
 import LeadCapture from '@/components/LeadCapture';
+import LeadCaptureTrigger from '@/components/LeadCaptureTrigger';
 import HeroLivePreview from './HeroLivePreview';
 import { AdCopy, DEFAULT_COPY, renderCopy } from '@/lib/adCopy';
 
@@ -34,6 +35,7 @@ export default function Hero({ copy = DEFAULT_COPY }: { copy?: AdCopy }) {
 
         {/* CTA abre el formulario breve; el equipo coordina la hora por WhatsApp. */}
         <div className="flex justify-center mb-10">
+          <LeadCaptureTrigger label={copy.cta} />
           <LeadCapture ctaLabel={copy.cta} />
         </div>
 

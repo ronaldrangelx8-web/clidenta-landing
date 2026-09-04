@@ -1,6 +1,13 @@
 "use client";
 
-import { FocusEvent, FormEvent, useEffect, useRef, useState } from "react";
+import {
+  FocusEvent,
+  FormEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -167,7 +174,6 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
     offsetTop: number;
   } | null>(null);
   const submissionId = useRef<string | null>(null);
-  const primaryCtaRef = useRef<HTMLButtonElement | null>(null);
   const [isPrimaryCtaVisible, setIsPrimaryCtaVisible] = useState(true);
   const selectedCountry =
     COUNTRY_OPTIONS.find((country) => country.iso === countryIso) ??
@@ -175,7 +181,9 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
   const phoneE164 = `${selectedCountry.dialCode}${phone}`;
 
   useEffect(() => {
-    const primaryCta = primaryCtaRef.current;
+    const primaryCta = document.querySelector<HTMLElement>(
+      '[data-lead-form-trigger="primary"]',
+    );
     if (!primaryCta) return;
 
     const observer = new IntersectionObserver(([entry]) => {
@@ -250,7 +258,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
     return () => controller.abort();
   }, []);
 
-  function reset() {
+  const reset = useCallback(() => {
     setStep(1);
     setFullName("");
     setCountryIso("PE");
@@ -261,7 +269,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
     setError(null);
     setSubmitting(false);
     submissionId.current = null;
-  }
+  }, []);
 
   function handleOpenChange(nextOpen: boolean) {
     setOpen(nextOpen);
@@ -271,11 +279,25 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
     if (!nextOpen && step === 4) reset();
   }
 
-  function openForm() {
+  const openForm = useCallback(() => {
     if (step === 4) reset();
     setOpen(true);
     captureAnalyticsEvent("lead_form_opened");
-  }
+  }, [reset, step]);
+
+  useEffect(() => {
+    function handleStaticTrigger(event: MouseEvent) {
+      const target = event.target;
+      if (!(target instanceof Element)) return;
+      if (!target.closest('[data-lead-form-trigger="primary"]')) return;
+
+      event.preventDefault();
+      openForm();
+    }
+
+    document.addEventListener("click", handleStaticTrigger);
+    return () => document.removeEventListener("click", handleStaticTrigger);
+  }, [openForm]);
 
   function keepFieldVisible(event: FocusEvent<HTMLInputElement>) {
     const field = event.currentTarget;
@@ -357,18 +379,6 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
 
   return (
     <>
-      <button
-        ref={primaryCtaRef}
-        type="button"
-        onClick={openForm}
-        data-cta="lead-form"
-        data-cta-label={ctaLabel}
-        className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-[0_10px_30px_-12px_hsl(var(--primary)/0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_16px_35px_-14px_hsl(var(--primary)/0.7)] active:translate-y-0 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto sm:px-10"
-      >
-        {ctaLabel}
-        <ArrowRight aria-hidden="true" size={19} />
-      </button>
-
       <button
         type="button"
         onClick={openForm}
