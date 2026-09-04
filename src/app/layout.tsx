@@ -3,8 +3,17 @@ import { DM_Sans, Fraunces } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
-const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans' });
-const fraunces = Fraunces({ subsets: ['latin'], variable: '--font-fraunces' });
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+});
+const fraunces = Fraunces({
+  subsets: ['latin'],
+  variable: '--font-fraunces',
+  display: 'swap',
+  preload: false,
+});
 
 export const metadata: Metadata = {
   title: 'El Mejor Recepcionista AI para Clínicas | Clidenta',
@@ -65,37 +74,6 @@ export default function RootLayout({
   return (
     <html lang="es">
       <head>
-        <Script
-          id="fb-pixel"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              !function(f,b,e,v,n,t,s)
-              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)}(window, document,'script',
-              'https://connect.facebook.net/en_US/fbevents.js');
-              fbq('init', '1677925763319298');
-              fbq('track', 'PageView');
-            `,
-          }}
-        />
-        <Script
-          id="ms-clarity"
-          strategy="lazyOnload"
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function(c,l,a,r,i,t,y){
-                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-              })(window, document, "clarity", "script", "xiplwu054l");
-            `,
-          }}
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -131,6 +109,63 @@ export default function RootLayout({
         </noscript>
         
         {children}
+
+        <Script
+          id="fb-pixel"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d){
+                var started=false, timer;
+                var events=['pointerdown','keydown'];
+                function start(){
+                  if(started)return;
+                  started=true;
+                  if(timer)w.clearTimeout(timer);
+                  events.forEach(function(event){w.removeEventListener(event,start)});
+                  !function(f,b,e,v,n,t,s)
+                  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                  n.queue=[];t=b.createElement(e);t.async=!0;
+                  t.src=v;s=b.getElementsByTagName(e)[0];
+                  s.parentNode.insertBefore(t,s)}(w,d,'script',
+                  'https://connect.facebook.net/en_US/fbevents.js');
+                  w.fbq('init','1677925763319298');
+                  w.fbq('track','PageView');
+                }
+                events.forEach(function(event){w.addEventListener(event,start,{once:true,passive:true})});
+                timer=w.setTimeout(start,2500);
+              })(window,document);
+            `,
+          }}
+        />
+        <Script
+          id="ms-clarity"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(w,d){
+                var started=false, timer;
+                var events=['pointerdown','keydown'];
+                function start(){
+                  if(started)return;
+                  started=true;
+                  if(timer)w.clearTimeout(timer);
+                  events.forEach(function(event){w.removeEventListener(event,start)});
+                  (function(c,l,a,r,i,t,y){
+                    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                    t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+                    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+                  })(w,d,'clarity','script','xiplwu054l');
+                }
+                events.forEach(function(event){w.addEventListener(event,start,{once:true,passive:true})});
+                if(d.readyState==='complete')timer=w.setTimeout(start,6000);
+                else w.addEventListener('load',function(){timer=w.setTimeout(start,6000)},{once:true});
+              })(window,document);
+            `,
+          }}
+        />
 
       </body>
     </html>

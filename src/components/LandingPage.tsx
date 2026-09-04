@@ -1,9 +1,7 @@
-import dynamic from 'next/dynamic';
 import Hero from '@/sections/Hero';
+import ReviewsMarquee from '@/sections/ReviewsMarquee';
+import Footer from '@/sections/Footer';
 import type { AdCopy } from '@/lib/adCopy';
-
-const ReviewsMarquee = dynamic(() => import('@/sections/ReviewsMarquee'), { ssr: true });
-const Footer = dynamic(() => import('@/sections/Footer'), { ssr: true });
 
 /** Composición completa de la landing; el copy del Hero varía por anuncio. */
 export default function LandingPage({ copy }: { copy: AdCopy }) {

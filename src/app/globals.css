@@ -91,3 +91,11 @@
   12% { transform: translate(1px, 0) rotate(1deg); }
   14% { transform: translate(-1px, 0) rotate(-1deg); }
 }
+
+/* Evita que el navegador pinte las reseñas hasta que se acerquen al viewport. */
+@supports (content-visibility: auto) {
+  .deferred-section {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 520px;
+  }
+}

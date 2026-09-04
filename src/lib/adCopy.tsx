@@ -1,4 +1,4 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
 /**
  * Copy dinámico por anuncio.
@@ -19,7 +19,7 @@ import React from 'react';
  */
 
 export type AdCopy = {
-  /** Texto de la ficha roja superior; el país geolocalizado se agrega al final. */
+  /** Texto de la ficha roja superior; el Hero agrega el mercado objetivo. */
   eyebrow: string;
   title: string;
   subtitle: string;
@@ -66,7 +66,7 @@ export async function fetchAdCopy(slug: string): Promise<AdCopy> {
 export function renderCopy(
   text: string,
   highlightClass = 'text-primary',
-): React.ReactNode[] {
+): ReactNode[] {
   return text.split(/(\*[^*]+\*|_[^_]+_)/g).map((part, i) => {
     if (part.startsWith('*') && part.endsWith('*')) {
       return (

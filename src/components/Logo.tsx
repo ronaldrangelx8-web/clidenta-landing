@@ -1,11 +1,10 @@
-import React from 'react';
 import Image from 'next/image';
 
 interface LogoProps {
   className?: string;
 }
 
-const Logo: React.FC<LogoProps> = ({ className = '' }) => {
+export default function Logo({ className = '' }: LogoProps) {
   return (
     <div className={`flex items-center justify-center ${className}`}>
       <Image
@@ -14,10 +13,8 @@ const Logo: React.FC<LogoProps> = ({ className = '' }) => {
         className="h-10 w-auto object-contain"
         width={208}
         height={40}
-        priority
+        loading="eager"
       />
     </div>
   );
-};
-
-export default Logo;
+}

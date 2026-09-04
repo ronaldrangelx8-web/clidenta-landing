@@ -1,6 +1,6 @@
-"use client";
-import React from 'react';
+import Image from 'next/image';
 import { Sparkles } from 'lucide-react';
+import agendaImage from '../../public/screens/agenda-v2.webp';
 
 /**
  * Captura de la agenda "en vivo": un cursor la recorre y hace click, entra un
@@ -9,7 +9,7 @@ import { Sparkles } from 'lucide-react';
  */
 export default function HeroLivePreview() {
   return (
-    <div className="relative rounded-2xl overflow-hidden ring-1 ring-slate-900/10 shadow-2xl shadow-primary/10 bg-white">
+    <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg shadow-primary/10 ring-1 ring-slate-900/10 sm:shadow-2xl">
       {/* Barra de navegador */}
       <div className="flex items-center gap-2 px-4 py-2.5 bg-slate-100 border-b border-slate-200/80 relative z-20">
         <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
@@ -20,7 +20,7 @@ export default function HeroLivePreview() {
         </span>
         <span className="ml-auto inline-flex items-center gap-1.5 text-[11px] font-medium text-emerald-600">
           <span className="relative flex h-2 w-2">
-            <span className="motion-safe:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+            <span className="absolute hidden h-full w-full rounded-full bg-emerald-400 opacity-75 sm:inline-flex sm:motion-safe:animate-ping" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
           </span>
           En vivo
@@ -29,11 +29,15 @@ export default function HeroLivePreview() {
 
       {/* Captura + capa animada */}
       <div className="relative">
-        <img
-          src="/screens/agenda.png"
+        <Image
+          src={agendaImage}
           alt="Agenda semanal de Clidenta con citas agendadas por la IA"
-          className="w-full block"
-          loading="eager"
+          className="block h-auto w-full"
+          sizes="(max-width: 640px) 300px, 896px"
+          quality={80}
+          decoding="sync"
+          priority
+          fetchPriority="high"
         />
 
         {/* Cursor que recorre la agenda */}
@@ -48,7 +52,7 @@ export default function HeroLivePreview() {
         </div>
 
         {/* Toast: la IA agendó una cita */}
-        <div className="pointer-events-none absolute bottom-3 right-3 z-10 opacity-0 motion-safe:animate-[hero-toast_6s_ease-in-out_infinite]">
+        <div className="pointer-events-none absolute bottom-3 right-3 z-10 hidden opacity-0 sm:block sm:motion-safe:animate-[hero-toast_6s_ease-in-out_infinite]">
           <div className="flex items-center gap-2.5 rounded-xl bg-white shadow-lg ring-1 ring-slate-900/10 px-3.5 py-2.5">
             <div className="h-8 w-8 rounded-lg bg-teal-50 text-teal-700 flex items-center justify-center shrink-0">
               <Sparkles size={16} />

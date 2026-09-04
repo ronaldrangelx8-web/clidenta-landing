@@ -86,7 +86,7 @@ module.exports = {
         },
         marquee: {
           "0%": { transform: "translateX(0)" },
-          "100%": { transform: "translateX(-33.333%)" },
+          "100%": { transform: "translateX(calc(-50% - 0.75rem))" },
         },
       },
       animation: {

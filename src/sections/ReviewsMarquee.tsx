@@ -1,5 +1,4 @@
-"use client";
-import React from 'react';
+import Image from 'next/image';
 import { Star, Quote } from 'lucide-react';
 
 const reviews = [
@@ -10,7 +9,7 @@ const reviews = [
     rating: 5,
     quote: 'La IA responde consultas complejas de ortodoncia de forma impecable. Redujimos las inasistencias en un 95%.',
     experience: 'Más de 40 años de experiencia',
-    avatar: 'https://randomuser.me/api/portraits/women/44.jpg'
+    avatar: '/reviews/dennisse.webp'
   },
   {
     id: 2,
@@ -19,7 +18,7 @@ const reviews = [
     rating: 5,
     quote: 'La IA responde al instante en Instagram y WhatsApp, y agenda 24/7 sin superponer horarios. Transformó nuestra captación.',
     experience: 'Odontología y Cirugía Estética en Lima',
-    avatar: 'https://randomuser.me/api/portraits/men/32.jpg'
+    avatar: '/reviews/miguel.webp'
   },
   {
     id: 3,
@@ -28,7 +27,7 @@ const reviews = [
     rating: 5,
     quote: 'La conversación es tan natural que los pacientes felicitan a nuestra «recepcionista». 40% menos tiempo administrativo.',
     experience: 'Especialista en Diseño de Sonrisas',
-    avatar: 'https://randomuser.me/api/portraits/men/67.jpg'
+    avatar: '/reviews/julio.webp'
   },
   {
     id: 4,
@@ -37,7 +36,7 @@ const reviews = [
     rating: 5,
     quote: 'Perdíamos 8 pacientes por semana por no responder a tiempo. Ahora la IA atiende en segundos, incluso a las 2 AM.',
     experience: 'Especialista en Endodoncia',
-    avatar: 'https://randomuser.me/api/portraits/women/68.jpg'
+    avatar: '/reviews/carla.webp'
   },
   {
     id: 5,
@@ -46,7 +45,7 @@ const reviews = [
     rating: 5,
     quote: 'Explica procedimientos complejos como implantes con claridad. Los pacientes llegan mejor informados y más decididos.',
     experience: 'Cirujano Maxilofacial con 15 años',
-    avatar: 'https://randomuser.me/api/portraits/men/52.jpg'
+    avatar: '/reviews/fernando.webp'
   },
   {
     id: 6,
@@ -55,16 +54,16 @@ const reviews = [
     rating: 5,
     quote: 'Maneja más de 200 conversaciones semanales sin errores y envía seguimientos. Es como tener 3 recepcionistas extra.',
     experience: 'Ortodoncista certificada en Invisalign',
-    avatar: 'https://randomuser.me/api/portraits/women/33.jpg'
+    avatar: '/reviews/valentina.webp'
   }
 ];
 
-// Double the reviews array to ensure seamless infinite looping scroll
-const duplicatedReviews = [...reviews, ...reviews, ...reviews, ...reviews];
+// Dos ciclos bastan para el marquee infinito y reducen a la mitad el HTML.
+const duplicatedReviews = [...reviews, ...reviews];
 
-const ReviewsMarquee: React.FC = () => {
+export default function ReviewsMarquee() {
   return (
-    <section className="bg-background pb-16 overflow-hidden">
+    <section className="deferred-section bg-background pb-16 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 mb-8">
         <p className="text-center text-xl md:text-2xl font-serif text-slate-900 font-semibold">
           Resultados comprobados por especialistas de la salud dental
@@ -72,15 +71,16 @@ const ReviewsMarquee: React.FC = () => {
       </div>
 
       {/* Infinite Scroll Container */}
-      <div className="relative w-full flex items-center justify-start overflow-x-hidden py-4">
+      <div className="relative flex w-full items-center justify-start overflow-x-auto py-4 md:overflow-x-hidden">
         {/* Left Gradient Shadow */}
         <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
         
         {/* Infinite Scroll Track */}
-        <div className="flex gap-6 animate-marquee whitespace-normal min-w-max hover:[animation-play-state:paused] cursor-pointer">
+        <div className="flex min-w-max gap-6 whitespace-normal md:animate-marquee md:cursor-pointer md:hover:[animation-play-state:paused]">
           {duplicatedReviews.map((review, idx) => (
             <div
               key={`${review.id}-${idx}`}
+              aria-hidden={idx >= reviews.length}
               className="w-[300px] md:w-[360px] bg-white border border-border rounded-2xl p-6 md:p-8 shadow-sm flex flex-col justify-between transition-transform duration-300 hover:scale-[1.02]"
             >
               <div>
@@ -99,9 +99,12 @@ const ReviewsMarquee: React.FC = () => {
               </div>
 
               <div className="border-t border-border/60 pt-4 mt-auto flex items-center gap-3">
-                <img
+                <Image
                   src={review.avatar}
                   alt={review.name}
+                  width={40}
+                  height={40}
+                  sizes="40px"
                   className="w-10 h-10 rounded-full object-cover shrink-0 shadow-md border-2 border-border"
                 />
                 <div>
@@ -125,6 +128,4 @@ const ReviewsMarquee: React.FC = () => {
       </div>
     </section>
   );
-};
-
-export default ReviewsMarquee;
+}
