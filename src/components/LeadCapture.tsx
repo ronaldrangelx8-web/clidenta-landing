@@ -9,7 +9,6 @@ import {
   CircleDollarSign,
   Clock3,
   Loader2,
-  MessageCircle,
 } from "lucide-react";
 import {
   Dialog,
@@ -310,9 +309,8 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
         onClick={openForm}
         data-cta="lead-form"
         data-cta-label={ctaLabel}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-[0_10px_30px_-12px_hsl(var(--primary)/0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_16px_35px_-14px_hsl(var(--primary)/0.7)] active:translate-y-0 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto sm:px-10"
+        className="inline-flex w-full items-center justify-center gap-3 rounded-xl bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-[0_10px_30px_-12px_hsl(var(--primary)/0.6)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/90 hover:shadow-[0_16px_35px_-14px_hsl(var(--primary)/0.7)] active:translate-y-0 active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:w-auto sm:px-10"
       >
-        <MessageCircle aria-hidden="true" size={22} />
         {ctaLabel}
         <ArrowRight aria-hidden="true" size={19} />
       </button>
@@ -323,23 +321,22 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
         aria-hidden={isPrimaryCtaVisible || open}
         tabIndex={isPrimaryCtaVisible || open ? -1 : 0}
         className={cn(
-          "fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3.5 font-semibold text-primary-foreground shadow-[0_16px_45px_-12px_rgba(15,89,82,0.75)] transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:hidden",
+          "fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-40 inline-flex min-h-14 items-center justify-center rounded-2xl bg-primary px-5 py-3.5 font-semibold text-primary-foreground shadow-[0_16px_45px_-12px_rgba(15,89,82,0.75)] transition-all duration-200 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:hidden",
           isPrimaryCtaVisible || open
             ? "pointer-events-none translate-y-4 opacity-0"
             : "translate-y-0 opacity-100",
         )}
       >
-        <MessageCircle aria-hidden="true" size={21} />
         {ctaLabel}
       </button>
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-h-[calc(100dvh-1rem)] overflow-y-auto rounded-[26px] border-primary/10 bg-[#fdfcf8] p-0 shadow-2xl sm:max-w-[560px]">
+        <DialogContent className="max-h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] min-w-0 max-w-[560px] overflow-x-hidden overflow-y-auto rounded-[22px] border-primary/10 bg-[#fdfcf8] p-0 shadow-2xl sm:w-full sm:rounded-[26px]">
           {step !== 4 && (
-            <div className="border-b border-primary/10 px-6 pb-4 pt-6 sm:px-8">
-              <div className="mb-3 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground">
-                <span>Solicitud de contacto</span>
-                <span>{step} de 3</span>
+            <div className="min-w-0 border-b border-primary/10 px-5 pb-4 pt-5 sm:px-8 sm:pt-6">
+              <div className="mb-3 grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 pr-9 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground sm:pr-0 sm:text-xs sm:tracking-[0.16em]">
+                <span className="min-w-0 truncate">Solicitud de contacto</span>
+                <span className="whitespace-nowrap">{step} de 3</span>
               </div>
               <div className="grid grid-cols-3 gap-1.5" aria-hidden="true">
                 {[1, 2, 3].map((item) => (
@@ -355,19 +352,19 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
             </div>
           )}
 
-          <div className="px-6 pb-7 pt-6 sm:px-8 sm:pb-8">
+          <div className="min-w-0 px-5 pb-6 pt-5 sm:px-8 sm:pb-8 sm:pt-6">
             {step === 1 && (
-              <form onSubmit={continueFromContact} noValidate>
-                <DialogHeader>
-                  <DialogTitle className="font-sans text-2xl font-bold tracking-tight text-slate-900">
+              <form className="min-w-0" onSubmit={continueFromContact} noValidate>
+                <DialogHeader className="min-w-0">
+                  <DialogTitle className="break-words font-sans text-xl font-bold leading-tight tracking-tight text-slate-900 sm:text-2xl">
                     Primero, cuéntanos quién eres
                   </DialogTitle>
-                  <DialogDescription className="text-base leading-relaxed">
+                  <DialogDescription className="text-sm leading-relaxed sm:text-base">
                     Usaremos estos datos solo para coordinar tu demostración.
                   </DialogDescription>
                 </DialogHeader>
 
-                <div className="mt-6 space-y-4">
+                <div className="mt-5 min-w-0 space-y-4 sm:mt-6">
                   <label className="block space-y-2">
                     <span className="text-sm font-semibold text-slate-800">
                       Tu nombre
@@ -389,7 +386,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                     >
                       Número de WhatsApp
                     </label>
-                    <div className="flex h-[52px] overflow-hidden rounded-xl border border-input bg-white focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/30">
+                    <div className="flex h-[52px] min-w-0 max-w-full overflow-hidden rounded-xl border border-input bg-white focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/30">
                       <Select
                         value={countryIso}
                         onValueChange={(nextIso) => {
@@ -409,10 +406,10 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                       >
                         <SelectTrigger
                           aria-label="Código de país"
-                          className="h-full w-[132px] shrink-0 rounded-none border-0 border-r border-input bg-slate-50/80 px-3 shadow-none transition-colors data-[size=default]:h-full hover:bg-slate-100 focus-visible:bg-slate-100 focus-visible:ring-0"
+                          className="h-full w-[116px] shrink-0 rounded-none border-0 border-r border-input bg-slate-50/80 px-2.5 shadow-none transition-colors data-[size=default]:h-full hover:bg-slate-100 focus-visible:bg-slate-100 focus-visible:ring-0 sm:w-[132px] sm:px-3"
                         >
                           <SelectValue>
-                            <span className="flex items-center gap-2.5">
+                            <span className="flex items-center gap-2">
                               <span
                                 aria-hidden="true"
                                 className="flex size-7 items-center justify-center rounded-lg bg-white text-base shadow-sm ring-1 ring-slate-200/80"
@@ -506,12 +503,12 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
             )}
 
             {step === 2 && (
-              <div>
-                <DialogHeader>
-                  <DialogTitle className="font-sans text-2xl font-bold tracking-tight text-slate-900">
+              <div className="min-w-0">
+                <DialogHeader className="min-w-0">
+                  <DialogTitle className="break-words font-sans text-xl font-bold leading-tight tracking-tight text-slate-900 sm:text-2xl">
                     ¿Cuándo prefieres que te contactemos?
                   </DialogTitle>
-                  <DialogDescription className="text-base leading-relaxed">
+                  <DialogDescription className="text-sm leading-relaxed sm:text-base">
                     Después acordaremos contigo la hora exacta por WhatsApp.
                   </DialogDescription>
                 </DialogHeader>
@@ -562,12 +559,12 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
             )}
 
             {step === 3 && (
-              <div>
-                <DialogHeader>
-                  <DialogTitle className="font-sans text-2xl font-bold tracking-tight text-slate-900">
+              <div className="min-w-0">
+                <DialogHeader className="min-w-0">
+                  <DialogTitle className="break-words font-sans text-xl font-bold leading-tight tracking-tight text-slate-900 sm:text-2xl">
                     Una última pregunta
                   </DialogTitle>
-                  <DialogDescription className="text-base leading-relaxed">
+                  <DialogDescription className="text-sm leading-relaxed sm:text-base">
                     La instalación de Clidenta tiene un costo de{" "}
                     <strong className="text-slate-900">USD 250</strong>.
                   </DialogDescription>
@@ -661,15 +658,15 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
             )}
 
             {step === 4 && (
-              <div className="py-5 text-center sm:py-8">
+              <div className="min-w-0 py-5 text-center sm:py-8">
                 <span className="mx-auto flex size-16 items-center justify-center rounded-full bg-secondary text-primary">
                   <Check aria-hidden="true" size={32} strokeWidth={2.5} />
                 </span>
-                <DialogHeader className="mt-6 text-center sm:text-center">
-                  <DialogTitle className="font-sans text-2xl font-bold tracking-tight text-slate-900">
+                <DialogHeader className="mt-6 min-w-0 text-center sm:text-center">
+                  <DialogTitle className="break-words font-sans text-xl font-bold leading-tight tracking-tight text-slate-900 sm:text-2xl">
                     ¡Listo! Ya recibimos tus datos
                   </DialogTitle>
-                  <DialogDescription className="mx-auto max-w-sm text-base leading-relaxed">
+                  <DialogDescription className="mx-auto max-w-sm text-sm leading-relaxed sm:text-base">
                     Un asesor te escribirá por WhatsApp para coordinar la hora
                     de la reunión.
                   </DialogDescription>
@@ -680,7 +677,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                   rel="noopener noreferrer"
                   className="mt-7 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-semibold text-primary-foreground transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                 >
-                  <MessageCircle aria-hidden="true" size={19} /> Ir a WhatsApp
+                  Ir a WhatsApp
                 </a>
               </div>
             )}
