@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FocusEvent, FormEvent, useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { captureAnalyticsEvent } from "@/instrumentation-client";
 
 type Availability = "TODAY" | "TOMORROW" | "FEW_WEEKS";
 type Budget = "READY" | "NEEDS_INFO";
@@ -161,6 +162,10 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
   const [budget, setBudget] = useState<Budget | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+  const [visualViewport, setVisualViewport] = useState<{
+    height: number;
+    offsetTop: number;
+  } | null>(null);
   const submissionId = useRef<string | null>(null);
   const primaryCtaRef = useRef<HTMLButtonElement | null>(null);
   const [isPrimaryCtaVisible, setIsPrimaryCtaVisible] = useState(true);
@@ -180,6 +185,38 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
     observer.observe(primaryCta);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!open || !window.visualViewport) {
+      setVisualViewport(null);
+      return;
+    }
+
+    const viewport = window.visualViewport;
+    const mobileQuery = window.matchMedia("(max-width: 639px)");
+    const updateViewport = () => {
+      if (!mobileQuery.matches) {
+        setVisualViewport(null);
+        return;
+      }
+
+      setVisualViewport({
+        height: Math.max(240, Math.floor(viewport.height)),
+        offsetTop: Math.max(0, Math.floor(viewport.offsetTop)),
+      });
+    };
+
+    updateViewport();
+    viewport.addEventListener("resize", updateViewport);
+    viewport.addEventListener("scroll", updateViewport);
+    mobileQuery.addEventListener("change", updateViewport);
+
+    return () => {
+      viewport.removeEventListener("resize", updateViewport);
+      viewport.removeEventListener("scroll", updateViewport);
+      mobileQuery.removeEventListener("change", updateViewport);
+    };
+  }, [open]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -228,12 +265,23 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
 
   function handleOpenChange(nextOpen: boolean) {
     setOpen(nextOpen);
+    if (!nextOpen) {
+      captureAnalyticsEvent("lead_form_closed", { step });
+    }
     if (!nextOpen && step === 4) reset();
   }
 
   function openForm() {
     if (step === 4) reset();
     setOpen(true);
+    captureAnalyticsEvent("lead_form_opened");
+  }
+
+  function keepFieldVisible(event: FocusEvent<HTMLInputElement>) {
+    const field = event.currentTarget;
+    window.setTimeout(() => {
+      field.scrollIntoView({ block: "center", behavior: "smooth" });
+    }, 180);
   }
 
   function continueFromContact(event: FormEvent) {
@@ -251,6 +299,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
       setError("Ingresa un correo electrónico válido.");
       return;
     }
+    captureAnalyticsEvent("lead_form_step_completed", { step: 1 });
     setStep(2);
   }
 
@@ -285,8 +334,13 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
           message || "No pudimos guardar tus datos. Inténtalo nuevamente.",
         );
       }
+      captureAnalyticsEvent("lead_form_submitted", {
+        availability,
+        budget,
+      });
       setStep(4);
     } catch (submitError) {
+      captureAnalyticsEvent("lead_form_submit_failed");
       setError(
         submitError instanceof Error
           ? submitError.message
@@ -318,6 +372,8 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
       <button
         type="button"
         onClick={openForm}
+        data-cta="lead-form"
+        data-cta-label={ctaLabel}
         aria-hidden={isPrimaryCtaVisible || open}
         tabIndex={isPrimaryCtaVisible || open ? -1 : 0}
         className={cn(
@@ -331,7 +387,23 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
       </button>
 
       <Dialog open={open} onOpenChange={handleOpenChange}>
-        <DialogContent className="max-h-[calc(100dvh-1rem)] w-[calc(100vw-1rem)] min-w-0 max-w-[560px] overflow-x-hidden overflow-y-auto rounded-[22px] border-primary/10 bg-[#fdfcf8] p-0 shadow-2xl sm:w-full sm:rounded-[26px]">
+        <DialogContent
+          onOpenAutoFocus={(event) => {
+            if (window.matchMedia("(max-width: 639px)").matches) {
+              event.preventDefault();
+            }
+          }}
+          style={
+            visualViewport
+              ? {
+                  height: `${visualViewport.height}px`,
+                  maxHeight: `${visualViewport.height}px`,
+                  top: `${visualViewport.offsetTop}px`,
+                }
+              : undefined
+          }
+          className="left-0 top-0 h-[100dvh] max-h-[100dvh] w-full min-w-0 max-w-none translate-x-0 translate-y-0 overflow-x-hidden overflow-y-auto overscroll-contain rounded-none border-primary/10 bg-[#fdfcf8] p-0 pb-[env(safe-area-inset-bottom)] shadow-2xl sm:left-[50%] sm:top-[50%] sm:h-auto sm:max-h-[calc(100dvh-1rem)] sm:w-full sm:max-w-[560px] sm:translate-x-[-50%] sm:translate-y-[-50%] sm:rounded-[26px] sm:pb-0"
+        >
           {step !== 4 && (
             <div className="min-w-0 border-b border-primary/10 px-5 pb-4 pt-5 sm:px-8 sm:pt-6">
               <div className="mb-3 grid min-w-0 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 pr-9 text-[10px] font-semibold uppercase tracking-[0.12em] text-muted-foreground sm:pr-0 sm:text-xs sm:tracking-[0.16em]">
@@ -370,10 +442,10 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                       Tu nombre
                     </span>
                     <Input
-                      autoFocus
                       autoComplete="name"
                       value={fullName}
                       onChange={(event) => setFullName(event.target.value)}
+                      onFocus={keepFieldVisible}
                       placeholder="Ej. Dra. Andrea Salazar"
                       className="h-[52px] rounded-xl bg-white px-4 text-base"
                     />
@@ -465,6 +537,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                             ),
                           )
                         }
+                        onFocus={keepFieldVisible}
                         placeholder={selectedCountry.placeholder}
                         className="min-w-0 flex-1 bg-transparent px-4 text-base tabular-nums outline-none placeholder:text-slate-400"
                       />
@@ -481,6 +554,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                       inputMode="email"
                       value={email}
                       onChange={(event) => setEmail(event.target.value)}
+                      onFocus={keepFieldVisible}
                       placeholder="doctor@clinica.com"
                       className="h-[52px] rounded-xl bg-white px-4 text-base"
                     />
@@ -523,6 +597,10 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                         onClick={() => {
                           setAvailability(option.value);
                           setError(null);
+                          captureAnalyticsEvent("lead_form_step_completed", {
+                            step: 2,
+                            availability: option.value,
+                          });
                           setStep(3);
                         }}
                         className="group flex w-full items-center gap-4 rounded-2xl border border-primary/15 bg-white p-4 text-left transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"

@@ -25,6 +25,13 @@ function loadPostHog(): Promise<PostHog | null> {
   return posthogPromise;
 }
 
+export function captureAnalyticsEvent(
+  event: string,
+  properties?: Record<string, unknown>,
+) {
+  void loadPostHog().then((posthog) => posthog?.capture(event, properties));
+}
+
 if (key && typeof window !== 'undefined') {
   let started = false;
   let delayedStart = 0;
@@ -50,12 +57,10 @@ if (key && typeof window !== 'undefined') {
       const cta = target.closest<HTMLElement>('[data-cta]');
       if (!cta) return;
 
-      void loadPostHog().then((posthog) =>
-        posthog?.capture('hero_cta_clicked', {
-          cta: cta.dataset.ctaLabel,
-          channel: cta.dataset.cta,
-        }),
-      );
+      captureAnalyticsEvent('hero_cta_clicked', {
+        cta: cta.dataset.ctaLabel,
+        channel: cta.dataset.cta,
+      });
     },
     { capture: true },
   );
