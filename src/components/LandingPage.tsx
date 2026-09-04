@@ -6,7 +6,7 @@ import type { AdCopy } from '@/lib/adCopy';
 /** Composición completa de la landing; el copy del Hero varía por anuncio. */
 export default function LandingPage({ copy }: { copy: AdCopy }) {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen pb-20 sm:pb-0">
       <Hero copy={copy} />
       <ReviewsMarquee />
       <Footer />

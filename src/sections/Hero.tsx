@@ -1,12 +1,7 @@
 import Logo from '@/components/Logo';
-import { MessageCircle } from 'lucide-react';
+import LeadCapture from '@/components/LeadCapture';
 import HeroLivePreview from './HeroLivePreview';
 import { AdCopy, DEFAULT_COPY, renderCopy } from '@/lib/adCopy';
-
-const WHATSAPP_NUMBER = '51920789569';
-const WHATSAPP_MESSAGE =
-  'Hola, vi Clidenta y quiero recibir más información y coordinar una demostración.';
-const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 
 export default function Hero({ copy = DEFAULT_COPY }: { copy?: AdCopy }) {
   return (
@@ -37,19 +32,9 @@ export default function Hero({ copy = DEFAULT_COPY }: { copy?: AdCopy }) {
           {renderCopy(copy.subtitle, 'text-primary font-semibold')}
         </p>
 
-        {/* CTA directo a WhatsApp */}
+        {/* CTA abre el formulario breve; el equipo coordina la hora por WhatsApp. */}
         <div className="flex justify-center mb-10">
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cta="whatsapp"
-            data-cta-label={copy.cta}
-            className="inline-flex w-full sm:w-auto items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold px-10 py-4 rounded-xl shadow-sm hover:bg-primary/90 hover:shadow active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-all duration-300 text-lg"
-          >
-            <MessageCircle aria-hidden="true" size={22} />
-            Agendar por WhatsApp
-          </a>
+          <LeadCapture ctaLabel={copy.cta} />
         </div>
 
         {/* Producto real, "en vivo": la agenda de Clidenta */}
