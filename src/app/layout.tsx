@@ -3,6 +3,10 @@ import { DM_Sans, Fraunces } from 'next/font/google';
 import Script from 'next/script';
 import './globals.css';
 
+const DEFAULT_META_PIXEL_ID = '1677925763319298';
+const META_PIXEL_ID =
+  process.env.NEXT_PUBLIC_META_PIXEL_ID?.trim() || DEFAULT_META_PIXEL_ID;
+
 const dmSans = DM_Sans({
   subsets: ['latin'],
   variable: '--font-dm-sans',
@@ -103,7 +107,7 @@ export default function RootLayout({
             height="1"
             width="1"
             style={{ display: 'none' }}
-            src={`https://www.facebook.com/tr?id=1677925763319298&ev=PageView&noscript=1`}
+            src={`https://www.facebook.com/tr?id=${encodeURIComponent(META_PIXEL_ID)}&ev=PageView&noscript=1`}
             alt=""
           />
         </noscript>
@@ -131,8 +135,13 @@ export default function RootLayout({
                   t.src=v;s=b.getElementsByTagName(e)[0];
                   s.parentNode.insertBefore(t,s)}(w,d,'script',
                   'https://connect.facebook.net/en_US/fbevents.js');
-                  w.fbq('init','1677925763319298');
+                  w.fbq('init',${JSON.stringify(META_PIXEL_ID)});
                   w.fbq('track','PageView');
+                  var pending=w.__clidentaMetaPixelQueue||[];
+                  w.__clidentaMetaPixelQueue=[];
+                  pending.forEach(function(args){
+                    if(Array.isArray(args))w.fbq.apply(w,args);
+                  });
                 }
                 events.forEach(function(event){w.addEventListener(event,start,{once:true,passive:true})});
                 timer=w.setTimeout(start,2500);

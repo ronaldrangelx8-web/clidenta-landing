@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { captureAnalyticsEvent } from "@/instrumentation-client";
+import { trackMetaLead } from "@/lib/metaPixel";
 
 import {
   BUDGET_OPTIONS,
@@ -486,6 +487,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
           message || "No pudimos guardar tus datos. Inténtalo nuevamente.",
         );
       }
+      trackMetaLead(currentSubmissionId);
       captureAnalyticsEvent("lead_form_submitted", {
         patientVolume,
         patientChallenges,
@@ -851,7 +853,9 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
 
                     <p className="text-xs leading-relaxed text-slate-500">
                       Al continuar, aceptas que Clidenta te contacte por
-                      WhatsApp y correo.
+                      WhatsApp y correo. Usaremos tus datos para coordinar tu
+                      demostración y medir el rendimiento de nuestras campañas
+                      en Meta.
                     </p>
                   </div>
                 )}
