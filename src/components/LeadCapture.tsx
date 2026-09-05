@@ -584,7 +584,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                     {step === 2 && PATIENT_CHALLENGES_QUESTION}
                     {step === 3 && BUDGET_QUESTION}
                     {step === 4 && CLINIC_NAME_QUESTION}
-                    {step === 5 && "Contact information"}
+                    {step === 5 && "Datos de contacto"}
                   </DialogTitle>
                   <DialogDescription
                     className={cn(
@@ -712,7 +712,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                     }}
                     onFocus={keepFieldVisible}
                     maxLength={180}
-                    placeholder="Enter your answer."
+                    placeholder="Escribe tu respuesta."
                     className="mt-5 h-[52px] rounded-lg bg-white px-4 text-base"
                   />
                 )}
@@ -721,7 +721,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                   <div className="mt-5 min-w-0 space-y-4">
                     <label className="block space-y-2">
                       <span className="text-sm font-medium text-slate-800">
-                        Email
+                        Correo electrónico
                       </span>
                       <Input
                         type="email"
@@ -734,13 +734,13 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                         }}
                         onFocus={keepFieldVisible}
                         maxLength={180}
-                        placeholder="Enter your answer."
+                        placeholder="Escribe tu respuesta."
                         className="h-[52px] rounded-lg bg-white px-4 text-base"
                       />
                     </label>
                     <label className="block space-y-2">
                       <span className="text-sm font-medium text-slate-800">
-                        Full name
+                        Nombre completo
                       </span>
                       <Input
                         autoComplete="name"
@@ -751,7 +751,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                         }}
                         onFocus={keepFieldVisible}
                         maxLength={120}
-                        placeholder="Enter your answer."
+                        placeholder="Escribe tu respuesta."
                         className="h-[52px] rounded-lg bg-white px-4 text-base"
                       />
                     </label>
@@ -760,7 +760,7 @@ export default function LeadCapture({ ctaLabel }: { ctaLabel: string }) {
                         htmlFor="lead-whatsapp"
                         className="block text-sm font-semibold text-slate-800"
                       >
-                        Phone number
+                        Número de teléfono
                       </label>
                       <div className="flex h-[52px] min-w-0 max-w-full overflow-hidden rounded-xl border border-input bg-white focus-within:border-ring focus-within:ring-2 focus-within:ring-ring/30">
                         <Select
